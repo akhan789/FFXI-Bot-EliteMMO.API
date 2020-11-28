@@ -8,10 +8,8 @@ namespace EliteMMO.Scripted.Views
     using EliteMMO.API;
     using System.Windows.Forms;
     using System.IO;
-    partial class ScriptOnEventTool
+    partial class ScriptOnEventToolView
     {
-        private static EliteAPI api;
-
         public bool botRunning = false;
         public string fileXML;
         public string _ext;

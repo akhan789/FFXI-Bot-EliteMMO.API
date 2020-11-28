@@ -6,12 +6,11 @@
     using System.Linq;
     using System.Threading;
     using System.Text.RegularExpressions;
-    public partial class ScriptOnEventTool : UserControl
+    public partial class ScriptOnEventToolView : UserControl
     {
-        public ScriptOnEventTool(EliteAPI core)
+        public ScriptOnEventToolView()
         {
             InitializeComponent();
-            api = core;
         }
 
         private void BgwScriptEventsDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

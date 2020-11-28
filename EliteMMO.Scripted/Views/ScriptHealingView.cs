@@ -2,12 +2,11 @@
 {
     using System.Windows.Forms;
     using API;
-    public partial class ScriptHealing : UserControl
+    public partial class ScriptHealingView : UserControl
     {
-        public ScriptHealing(EliteAPI core)
+        public ScriptHealingView()
         {
             InitializeComponent();
-            api = core;
         }
     }
 }

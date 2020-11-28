@@ -11,3 +11,21 @@ C:\Users\Christopher Malo\Documents\Visual Studio 2013\Projects\EliteMMO.Scripte
 C:\Users\Christopher Malo\Documents\Visual Studio 2013\Projects\EliteMMO.Scripted\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptNaviMap.resources
 C:\Users\Christopher Malo\Documents\Visual Studio 2013\Projects\EliteMMO.Scripted\EliteMMO.Scripted\obj\Debug\Scripted.exe
 C:\Users\Christopher Malo\Documents\Visual Studio 2013\Projects\EliteMMO.Scripted\EliteMMO.Scripted\obj\Debug\Scripted.pdb
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.csprojAssemblyReference.cache
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Properties.Resources.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptHealing.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptNaviMap.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptOnEventTool.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.csproj.GenerateResource.cache
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\Scripted.exe
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\Scripted.pdb
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\bin\Debug\Scripted.exe
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\bin\Debug\Scripted.pdb
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\bin\Debug\Newtonsoft.Json.dll
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.csproj.CopyComplete
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.MainWindowView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptFarmView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptHealingView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptNaviMapView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptOnEventToolView.resources

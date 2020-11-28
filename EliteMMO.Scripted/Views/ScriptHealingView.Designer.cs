@@ -1,9 +1,8 @@
 ﻿namespace EliteMMO.Scripted.Views
 {
     using EliteMMO.API;
-    partial class ScriptHealing
+    partial class ScriptHealingView
     {
-        private EliteAPI api;
         /// <summary> 
         /// Required designer variable.
         /// </summary>

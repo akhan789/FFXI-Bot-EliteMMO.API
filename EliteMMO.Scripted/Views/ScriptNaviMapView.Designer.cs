@@ -1,9 +1,8 @@
 ﻿namespace EliteMMO.Scripted.Views
 {
     using EliteMMO.API;
-    partial class ScriptNaviMap
+    partial class ScriptNaviMapView
     {
-        private EliteAPI api;
         public bool isRunning = false;
         /// <summary> 
         /// Required designer variable.

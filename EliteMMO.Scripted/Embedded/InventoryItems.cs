@@ -2,20 +2,25 @@
 {
     using System.Collections.Generic;
     using API;
+    using EliteMMO.Scripted.Utilities;
+
     public class InventoryItems
     {
-        private static EliteAPI api;
-        public static Dictionary<string, string> Items = new Dictionary<string, string>();
+        public static Dictionary<string, string> items = new Dictionary<string, string>();
         public static void PopulateItems()
         {
-            Items.Clear();
+            items.Clear();
 
             for (var x = 0; x < 32767; x++)
             {
-                var i = api.Resources.GetItem((uint)x);
-
-                if (string.IsNullOrEmpty(i?.Name)) continue;
-                Items.Add(i.ItemID.ToString(), i.Name);
+                var i = EliteMMOApiUtils.GetItem((uint)x);
+                foreach (string name in i.Name)
+                {
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        items.Add(i.ItemID.ToString(), name);
+                    }
+                }
             }
         }
     }

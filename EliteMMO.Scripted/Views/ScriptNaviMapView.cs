@@ -1,13 +1,11 @@
 ﻿namespace EliteMMO.Scripted.Views
 {
     using System.Windows.Forms;
-    using API;
-    public partial class ScriptNaviMap : UserControl
+    public partial class ScriptNaviMapView : UserControl
     {
-        public ScriptNaviMap(EliteAPI core)
+        public ScriptNaviMapView()
         {
             InitializeComponent();
-            api = core;
         }
 
         private void BgwNaviDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

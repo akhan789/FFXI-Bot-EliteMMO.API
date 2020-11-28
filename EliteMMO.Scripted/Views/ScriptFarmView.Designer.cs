@@ -1,22 +1,20 @@
 ﻿namespace EliteMMO.Scripted.Views
 {
+    using API;
     using System;
-    using System.Windows.Forms;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Xml.Linq;
-    using System.Xml;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
+    using System.Linq;
     using System.Security.Policy;
-    using API;
-    partial class ScriptFarmDNC
+    using System.Text;
+    using System.Threading;
+    using System.Windows.Forms;
+    using System.Xml;
+    using System.Xml.Linq;
+    partial class ScriptFarmView
     {
-        private static EliteAPI api;
-
         List<WayPoint> route = new List<WayPoint>();
 
         public double DistanceTolerance { get; set; }
@@ -41,8 +39,8 @@
 
         //public static Dictionary<double, double> route = new Dictionary<double, double>();
 
-        public List<int>    partyIDs = new List<int>();
-        public List<int> ignoreTarget = new List<int>(); 
+        public List<int> partyIDs = new List<int>();
+        public List<int> ignoreTarget = new List<int>();
 
         public static List<string> DebugLog = new List<string>();
 
@@ -4643,7 +4641,7 @@
 
             startScriptToolStripMenuItem.Enabled = false;
             stopScriptToolStripMenuItem.Enabled = true;
-            
+
             if (!bgw_script_dnc.IsBusy)
                 bgw_script_dnc.RunWorkerAsync();
 
@@ -4692,7 +4690,7 @@
                 playerJA.Items.Clear();
 
             #region load MJ (main job)
-            
+
             #region WAR JA
             if (api.Player.GetPlayerInfo().MainJob == 1)
             {
@@ -4898,7 +4896,7 @@
                         "Mug - (Thief)",
                     });
                 }
-                if (PlayerInfo.MainJobLevel >= 75 && PlayerInfo.HasAbility(667) && 
+                if (PlayerInfo.MainJobLevel >= 75 && PlayerInfo.HasAbility(667) &&
                     !playerJA.Items.Contains("Assassin's Charge - (Thief)"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -5475,7 +5473,7 @@
                         "Sange - (Ninja)",
                     });
                 }
-                if (api.Player.GetPlayerInfo().MainJobLevel >= 77 && 
+                if (api.Player.GetPlayerInfo().MainJobLevel >= 77 &&
                     !playerJA.Items.Contains("Futae - (Ninja"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -5507,7 +5505,7 @@
                         "Kakka: Ichi - (Ninja)"
                     });
                 }
-                if (api.Player.GetPlayerInfo().MainJobLevel >= 95 && 
+                if (api.Player.GetPlayerInfo().MainJobLevel >= 95 &&
                     !playerJA.Items.Contains("Issekigan - (Ninja)"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -5615,9 +5613,9 @@
                     });
                 }
                 /*if (api.Player.GetPlayerInfo().MainJobLevel >= 40 &&
-                    !checkedListBox1.Items.Contains("Quick Draw - (Corsair)"))
+                    !checkedListBox1.items.Contains("Quick Draw - (Corsair)"))
                 {
-                    checkedListBox1.Items.AddRange(new object[]
+                    checkedListBox1.items.AddRange(new object[]
                     {
                         "Quick Draw - (Corsair)",
                         "Dark Shot - (Corsair)",
@@ -5675,7 +5673,7 @@
             #region DNC JA
             if (api.Player.GetPlayerInfo().MainJob == 19)
             {
-                if (api.Player.GetPlayerInfo().MainJobLevel >= 25 && 
+                if (api.Player.GetPlayerInfo().MainJobLevel >= 25 &&
                     !playerJA.Items.Contains("Spectral Jig - (DNC)"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -5686,15 +5684,15 @@
                 if (PlayerInfo.MainJobLevel >= 75 && PlayerInfo.HasAbility(749) &&
                     !playerJA.Items.Contains("Saber Dance - (DNC)"))
                 {
-                    playerJA.Items.AddRange(new object[] 
+                    playerJA.Items.AddRange(new object[]
                     {
-           	            "Saber Dance - (DNC)",
+                           "Saber Dance - (DNC)",
                     });
                 }
                 if (PlayerInfo.MainJobLevel >= 75 && PlayerInfo.HasAbility(750) &&
                     !playerJA.Items.Contains("Fan Dance - (DNC)"))
                 {
-                    playerJA.Items.AddRange(new object[] 
+                    playerJA.Items.AddRange(new object[]
                     {
                         "Fan Dance - (DNC)",
                     });
@@ -5702,12 +5700,12 @@
                 if (PlayerInfo.MainJobLevel >= 75 && PlayerInfo.HasAbility(751) &&
                     !playerJA.Items.Contains("No Foot Rise - (DNC)"))
                 {
-                    playerJA.Items.AddRange(new object[] 
+                    playerJA.Items.AddRange(new object[]
                     {
-			            "No Foot Rise - (DNC)",
+                        "No Foot Rise - (DNC)",
                     });
                 }
-                if (api.Player.GetPlayerInfo().MainJobLevel >= 77 && 
+                if (api.Player.GetPlayerInfo().MainJobLevel >= 77 &&
                     !playerJA.Items.Contains("Presto - (DNC)"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -5731,17 +5729,17 @@
                 if (api.Player.GetPlayerInfo().MainJobLevel >= 5 &&
                     !playerJA.Items.Contains("Ignis - (Rune Fencer)"))
                 {
-                    playerJA.Items.AddRange(new object[] 
+                    playerJA.Items.AddRange(new object[]
                     {
-				        "Ignis - (Rune Fencer)",
-				        "Gelus - (Rune Fencer)",
-				        "Flabra - (Rune Fencer)",
-				        "Tellus - (Rune Fencer)",
-				        "Sulpor - (Rune Fencer)",
-				        "Unda - (Rune Fencer)",
-				        "Lux - (Rune Fencer)",
-				        "Tenebrae - (Rune Fencer)",
-			        });
+                        "Ignis - (Rune Fencer)",
+                        "Gelus - (Rune Fencer)",
+                        "Flabra - (Rune Fencer)",
+                        "Tellus - (Rune Fencer)",
+                        "Sulpor - (Rune Fencer)",
+                        "Unda - (Rune Fencer)",
+                        "Lux - (Rune Fencer)",
+                        "Tenebrae - (Rune Fencer)",
+                    });
                 }
                 if (api.Player.GetPlayerInfo().MainJobLevel >= 10 &&
                     !playerJA.Items.Contains("Ward: Vallation - (Rune Fencer)"))
@@ -5845,7 +5843,7 @@
 
             #endregion
             #region load SJ (sub job)
-            
+
             #region WAR JA
             if (api.Player.GetPlayerInfo().SubJob == 1)
             {
@@ -6250,7 +6248,7 @@
             #region DNC JA
             if (api.Player.GetPlayerInfo().SubJob == 19)
             {
-                if (api.Player.GetPlayerInfo().SubJobLevel >= 25 && 
+                if (api.Player.GetPlayerInfo().SubJobLevel >= 25 &&
                     !playerJA.Items.Contains("Spectral Jig - (DNC)"))
                 {
                     playerJA.Items.AddRange(new object[]
@@ -6266,17 +6264,17 @@
                 if (api.Player.GetPlayerInfo().SubJobLevel >= 5 &&
                     !playerJA.Items.Contains("Ignis - (Rune Fencer)"))
                 {
-                    playerJA.Items.AddRange(new object[] 
+                    playerJA.Items.AddRange(new object[]
                     {
-				        "Ignis - (Rune Fencer)",
-				        "Gelus - (Rune Fencer)",
-				        "Flabra - (Rune Fencer)",
-				        "Tellus - (Rune Fencer)",
-				        "Sulpor - (Rune Fencer)",
-				        "Unda - (Rune Fencer)",
-				        "Lux - (Rune Fencer)",
-				        "Tenebrae - (Rune Fencer)",
-			        });
+                        "Ignis - (Rune Fencer)",
+                        "Gelus - (Rune Fencer)",
+                        "Flabra - (Rune Fencer)",
+                        "Tellus - (Rune Fencer)",
+                        "Sulpor - (Rune Fencer)",
+                        "Unda - (Rune Fencer)",
+                        "Lux - (Rune Fencer)",
+                        "Tenebrae - (Rune Fencer)",
+                    });
                 }
                 if (api.Player.GetPlayerInfo().SubJobLevel >= 10 &&
                     !playerJA.Items.Contains("Ward: Vallation - (Rune Fencer)"))
@@ -6325,7 +6323,7 @@
         public void CharacterUpdate()
         {
             #region DNC Options Enable/Disable
-            
+
             #region sambas
             if (api.Player.GetPlayerInfo().MainJob == 19 && api.Player.GetPlayerInfo().MainJobLevel >= 5 ||
                 api.Player.GetPlayerInfo().SubJob == 19 && api.Player.GetPlayerInfo().SubJobLevel >= 5)
@@ -6649,7 +6647,7 @@
             for (var x = 0; x < members.Count; x++)
             {
                 var pID = members.SingleOrDefault(m => m.ID == x);
-                
+
                 if (!partyIDs.Contains((int)pID.ID))
                     partyIDs.Add((int)pID.ID);
             }
@@ -6666,7 +6664,7 @@
             {
                 var member = members.SingleOrDefault(m => m.Name == assistplayer.Text);
                 var assisted = api.Entity.GetEntity((int)member.ID);
-                
+
                 if (assisted.Status == 1 && assisted.Distance <= (float)assistDist.Value)
                 {
                     WindowInfo.SendText("/assist " + assistplayer.Text);
@@ -6746,44 +6744,44 @@
 
             #region CheckBuffs
 
-            if (PlayerInfo.HasBuff(4) && hw.Contains("Paralyze"))      { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(3) && hw.Contains("Poison"))        { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(5) && hw.Contains("Blind"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(11) && hw.Contains("Bind"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(9) && hw.Contains("Curse"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(13) && hw.Contains("Slow"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(6) && hw.Contains("Silence"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(31) && hw.Contains("Plague"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(8) && hw.Contains("Disease"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(30) && hw.Contains("Bane"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(135) && hw.Contains("Bio"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(128) && hw.Contains("Burn"))        { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(130) && hw.Contains("Choke"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(131) && hw.Contains("Rasp"))        { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(133) && hw.Contains("Drown"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(129) && hw.Contains("Frost"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(132) && hw.Contains("Shock"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(134) && hw.Contains("Dia"))         { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(136) && hw.Contains("STR Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(137) && hw.Contains("DEX Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(138) && hw.Contains("VIT Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(139) && hw.Contains("AGI Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(141) && hw.Contains("MND Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(142) && hw.Contains("CHR Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(174) && hw.Contains("MACC Down"))   { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(148) && hw.Contains("EVA Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(149) && hw.Contains("DEF Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(147) && hw.Contains("ATT Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(146) && hw.Contains("ACC Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(404) && hw.Contains("MEVA Down"))   { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(175) && hw.Contains("MATT Down"))   { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(167) && hw.Contains("MDEF Down"))   { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(144) && hw.Contains("HP Down"))     { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(145) && hw.Contains("MP Down"))     { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(189) && hw.Contains("TP Down"))     { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(140) && hw.Contains("INT Down"))    { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(186) && hw.Contains("Helix"))       { CastHealingWatz(); }
-            if (PlayerInfo.HasBuff(12) && hw.Contains("Gravity"))      { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(4) && hw.Contains("Paralyze")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(3) && hw.Contains("Poison")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(5) && hw.Contains("Blind")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(11) && hw.Contains("Bind")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(9) && hw.Contains("Curse")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(13) && hw.Contains("Slow")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(6) && hw.Contains("Silence")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(31) && hw.Contains("Plague")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(8) && hw.Contains("Disease")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(30) && hw.Contains("Bane")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(135) && hw.Contains("Bio")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(128) && hw.Contains("Burn")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(130) && hw.Contains("Choke")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(131) && hw.Contains("Rasp")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(133) && hw.Contains("Drown")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(129) && hw.Contains("Frost")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(132) && hw.Contains("Shock")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(134) && hw.Contains("Dia")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(136) && hw.Contains("STR Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(137) && hw.Contains("DEX Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(138) && hw.Contains("VIT Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(139) && hw.Contains("AGI Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(141) && hw.Contains("MND Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(142) && hw.Contains("CHR Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(174) && hw.Contains("MACC Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(148) && hw.Contains("EVA Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(149) && hw.Contains("DEF Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(147) && hw.Contains("ATT Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(146) && hw.Contains("ACC Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(404) && hw.Contains("MEVA Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(175) && hw.Contains("MATT Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(167) && hw.Contains("MDEF Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(144) && hw.Contains("HP Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(145) && hw.Contains("MP Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(189) && hw.Contains("TP Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(140) && hw.Contains("INT Down")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(186) && hw.Contains("Helix")) { CastHealingWatz(); }
+            if (PlayerInfo.HasBuff(12) && hw.Contains("Gravity")) { CastHealingWatz(); }
 
             #endregion
         }
@@ -6860,7 +6858,7 @@
         #region JA: Flourishe (I,II,III)
         private void UseFlourish()
         {
-            if (!botRunning || PlayerInfo.Status != 1 || PlayerInfo.HasBuff(16)) 
+            if (!botRunning || PlayerInfo.Status != 1 || PlayerInfo.HasBuff(16))
                 return;
 
             var retVal = 0;
@@ -6923,12 +6921,30 @@
 
             var retVal = 0;
 
-                 if (PlayerInfo.HasBuff(381)) { retVal = 1; }
-            else if (PlayerInfo.HasBuff(382)) { retVal = 2; }
-            else if (PlayerInfo.HasBuff(383)) { retVal = 3; }
-            else if (PlayerInfo.HasBuff(384)) { retVal = 4; }
-            else if (PlayerInfo.HasBuff(385)) { retVal = 5; }
-            else if (PlayerInfo.HasBuff(588)) { retVal = 6; }
+            if (PlayerInfo.HasBuff(381))
+            {
+                retVal = 1;
+            }
+            else if (PlayerInfo.HasBuff(382))
+            {
+                retVal = 2;
+            }
+            else if (PlayerInfo.HasBuff(383))
+            {
+                retVal = 3;
+            }
+            else if (PlayerInfo.HasBuff(384))
+            {
+                retVal = 4;
+            }
+            else if (PlayerInfo.HasBuff(385))
+            {
+                retVal = 5;
+            }
+            else if (PlayerInfo.HasBuff(588))
+            {
+                retVal = 6;
+            }
 
             if (usequickstep.Checked && (TargetInfo.ID > 0 && TargetInfo.ID != PlayerInfo.ServerID) &&
                 !PlayerInfo.HasBuff(588) && Recast.GetAbilityRecast(220) == 0)
@@ -7156,7 +7172,7 @@
                 Thread.Sleep(TimeSpan.FromSeconds(1.0));
             }
             if (ja.Contains("Bully - (Thief)") && !PlayerInfo.HasBuff(16) &&
-                Recast.GetAbilityRecast(240) == 0 && TargetInfo.HPP > 10 && 
+                Recast.GetAbilityRecast(240) == 0 && TargetInfo.HPP > 10 &&
                 PlayerInfo.Status == 1 && TargetInfo.ID > 0)
             {
                 api.ThirdParty.SendString("/ja \"Bully\" <t>");
@@ -8061,7 +8077,7 @@
                     api.ThirdParty.SendString("/ma \"Utsusemi: Ni\" <me>");
                     Thread.Sleep(TimeSpan.FromSeconds(3.0));
                 }
-                else if (Recast.GetAbilityRecast(338) == 0 && 
+                else if (Recast.GetAbilityRecast(338) == 0 &&
                          !PlayerInfo.HasBuff(444) &&
                          !PlayerInfo.HasBuff(445))
                 {
@@ -8158,7 +8174,7 @@
         #region Methods: PET
 
         #region PET: BST
-        
+
         #region JA: BST (get/set)
         private void BSTGetJA()
         {
@@ -9058,14 +9074,14 @@
                         });
                         }
                         break;
-                    #endregion
+                        #endregion
                 }
             }
 
             #region BST: Pet Ready
 
             #region Load MJ (main job)
-            if (PlayerInfo.MainJobLevel >= 25 && 
+            if (PlayerInfo.MainJobLevel >= 25 &&
                 !PetReady.Items.Contains("Sic - (BST)"))
             {
                 PetReady.Items.AddRange(new object[]
@@ -9073,7 +9089,7 @@
                     "Sic - (BST)",
                 });
             }
-            if (PlayerInfo.MainJobLevel >= 45 && 
+            if (PlayerInfo.MainJobLevel >= 45 &&
                 !PetReady.Items.Contains("Snarl - (BST)"))
             {
                 PetReady.Items.AddRange(new object[]
@@ -9097,7 +9113,7 @@
                     "Feral Howl - (BST)",
                 });
             }
-            if (PlayerInfo.MainJobLevel >= 83 && 
+            if (PlayerInfo.MainJobLevel >= 83 &&
                 !PetReady.Items.Contains("Spur - (BST)"))
             {
                 PetReady.Items.AddRange(new object[]
@@ -9105,7 +9121,7 @@
                     "Spur - (BST)",
                 });
             }
-            if (PlayerInfo.MainJobLevel >= 93 && 
+            if (PlayerInfo.MainJobLevel >= 93 &&
                 !PetReady.Items.Contains("Run Wild - (BST)"))
             {
                 PetReady.Items.AddRange(new object[]
@@ -9901,7 +9917,7 @@
                 return;
 
             #region JA: DRG
-            if ((PlayerInfo.MainJobLevel >= 25 || PlayerInfo.SubJobLevel >= 25) && 
+            if ((PlayerInfo.MainJobLevel >= 25 || PlayerInfo.SubJobLevel >= 25) &&
                  !WyvernJA.Items.Contains("Spirit Link - (Dragoon)"))
             {
                 WyvernJA.Items.AddRange(new object[]
@@ -9917,7 +9933,7 @@
                     "Deep Breathing - (Dragoon)",
                 });
             }
-            if (PlayerInfo.MainJobLevel >= 90 && 
+            if (PlayerInfo.MainJobLevel >= 90 &&
                 !WyvernJA.Items.Contains("Smiting Breath - (Dragoon)"))
             {
                 WyvernJA.Items.AddRange(new object[]
@@ -9926,7 +9942,7 @@
                     "Restoring Breath - (Dragoon)",
                 });
             }
-            if (PlayerInfo.MainJobLevel >= 95 && 
+            if (PlayerInfo.MainJobLevel >= 95 &&
                 !WyvernJA.Items.Contains("Steady Wing - (Dragoon)"))
             {
                 WyvernJA.Items.AddRange(new object[]
@@ -10550,7 +10566,7 @@
             if (!aggro.Checked || PlayerInfo.Status == 1 || isPulled)
                 return;
 
-            var searchID = (float) aggroRange.Value;
+            var searchID = (float)aggroRange.Value;
             var targetID = -1;
 
             for (var x = 0; x < 2048; x++)
@@ -10739,7 +10755,7 @@
                         TargetInfo.FaceTarget(TargetInfo.X, TargetInfo.Z);
                         Thread.Sleep(TimeSpan.FromSeconds(0.1));
 
-                        if (target.Distance > (float)targetSearchDist.Value && 
+                        if (target.Distance > (float)targetSearchDist.Value &&
                             target.ClaimID == PlayerInfo.ServerID)
                             break;
                     }
@@ -10825,7 +10841,7 @@
 
             var followed = api.Entity.GetEntity(Convert.ToInt32(followID));
 
-            if (followed.Distance >= (float) followDist.Value && followed.Status == 0)
+            if (followed.Distance >= (float)followDist.Value && followed.Status == 0)
             {
                 if (TargetInfo.ID != followed.TargetID)
                     TargetInfo.SetTarget(followID);
@@ -10834,10 +10850,10 @@
                     api.ThirdParty.SendString("/lockon <t>");
 
                 isMoving = true;
-                while (Math.Truncate(followed.Distance) >= (float) followDist.Value)
+                while (Math.Truncate(followed.Distance) >= (float)followDist.Value)
                 {
-                    api.AutoFollow.SetAutoFollowCoords(TargetInfo.X - PlayerInfo.X, 
-                                                       TargetInfo.Y - PlayerInfo.Y, 
+                    api.AutoFollow.SetAutoFollowCoords(TargetInfo.X - PlayerInfo.X,
+                                                       TargetInfo.Y - PlayerInfo.Y,
                                                        TargetInfo.Z - PlayerInfo.Z);
 
                     api.AutoFollow.IsAutoFollowing = true;
@@ -10887,12 +10903,12 @@
 
                 var move = true;
                 var time = 15;
-                
+
                 isMoving = true;
                 while (Math.Truncate(entity.Distance) >= (float)KeepTargetRange.Value && entity.ClaimID == 0)
                 {
-                    api.AutoFollow.SetAutoFollowCoords(TargetInfo.X - PlayerInfo.X, 
-                                                       TargetInfo.Y - PlayerInfo.Y, 
+                    api.AutoFollow.SetAutoFollowCoords(TargetInfo.X - PlayerInfo.X,
+                                                       TargetInfo.Y - PlayerInfo.Y,
                                                        TargetInfo.Z - PlayerInfo.Z);
 
                     api.AutoFollow.IsAutoFollowing = true;
@@ -10908,7 +10924,7 @@
                         if (move)
                         {
                             move = false;
-                            
+
                             if (time != 15)
                                 time = time + 10;
 
@@ -11114,8 +11130,8 @@
 
         public double DistanceTo(double x, double z) => Math.Abs(x) < .00001 && Math.Abs(z) < .00001 ? 0 : DistanceTo(x, api.Player.Y, z);
 
-        public double DistanceTo(double x, double y, double z) => Math.Sqrt(Math.Pow(api.Player.X - x, 2) + 
-                                                                            Math.Pow(api.Player.Y - y, 2) + 
+        public double DistanceTo(double x, double y, double z) => Math.Sqrt(Math.Pow(api.Player.X - x, 2) +
+                                                                            Math.Pow(api.Player.Y - y, 2) +
                                                                             Math.Pow(z - api.Player.Z, 2));
 
         public int GetIndexOfClosestPoint(int start = 0)
@@ -11180,7 +11196,7 @@
             {
                 return api.Player.HasWeaponSkill(id);
             }
-            public static int ServerID => (int) api.Entity.GetLocalPlayer().ServerID;
+            public static int ServerID => (int)api.Entity.GetLocalPlayer().ServerID;
 
             public static int TargetID => (int)api.Entity.GetLocalPlayer().TargetID;
             public static float X => api.Entity.GetLocalPlayer().X;
@@ -11220,18 +11236,18 @@
             }
             public static string Name
             {
-                get { return api.Entity.GetEntity((int) api.Target.GetTargetInfo().TargetIndex).Name; }
+                get { return api.Entity.GetEntity((int)api.Target.GetTargetInfo().TargetIndex).Name; }
             }
             public static int ID
             {
                 get
                 {
-                    return (int) api.Entity.GetEntity((int) api.Target.GetTargetInfo().TargetIndex).TargetID;
+                    return (int)api.Entity.GetEntity((int)api.Target.GetTargetInfo().TargetIndex).TargetID;
                 }
             }
             public static int HPP
             {
-                get { return api.Entity.GetEntity((int) api.Target.GetTargetInfo().TargetIndex).HealthPercent; }
+                get { return api.Entity.GetEntity((int)api.Target.GetTargetInfo().TargetIndex).HealthPercent; }
             }
             public static double Distance => Math.Truncate((10 * api.Entity.GetEntity((int)api.Target.GetTargetInfo().TargetIndex).Distance) / 10);
 
@@ -11266,7 +11282,7 @@
                     var ID = api.Entity.GetEntity(x);
 
                     if (ID.Name != null && ID.Name.ToLower().Equals(name.ToLower()))
-                        return (int) ID.TargetID;
+                        return (int)ID.TargetID;
                 }
                 return -1;
             }
@@ -11294,7 +11310,7 @@
             {
                 var angle = Math.Atan((z2 - z1) / (x2 - x1));
                 angle *= -(128.0f / 3.14159265359f);
-                return (float) (x2 > x1 ? angle + 128 : angle);
+                return (float)(x2 > x1 ? angle + 128 : angle);
             }
         }
         #endregion
@@ -11328,7 +11344,7 @@
 
             public static void KeyPress(API.Keys key)
             {
-                
+
                 api.ThirdParty.KeyPress(key);
             }
 
@@ -11386,12 +11402,12 @@
 
             public static int TPP
             {
-                get { return (int) api.Entity.GetEntity(api.Entity.GetLocalPlayer().PetIndex).PetTP; }
+                get { return (int)api.Player.PetTP; }
             }
 
             public static int Status
             {
-                get { return (int) api.Entity.GetEntity(api.Entity.GetLocalPlayer().PetIndex).Status; }
+                get { return (int)api.Entity.GetEntity(api.Entity.GetLocalPlayer().PetIndex).Status; }
             }
         }
         #endregion
@@ -11414,7 +11430,7 @@
 
                 if (item.Id == Convert.ToInt32(ID))
                 {
-                    itemc = itemc + (int) item.Count;
+                    itemc = itemc + (int)item.Count;
                 }
             }
             return itemc;
@@ -11427,9 +11443,13 @@
             for (var x = 0; x < 32767; x++)
             {
                 var i = api.Resources.GetItem((uint)x);
-
-                if (!string.IsNullOrEmpty(i?.Name))
-                    items.Add(i.ItemID.ToString(), i.Name);
+                foreach (string name in i.Name)
+                {
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        items.Add(i.ItemID.ToString(), name);
+                    }
+                }
             }
         }
 

@@ -6,12 +6,11 @@
     using System.Linq;
     using API;
     using Embedded;
-    public partial class ScriptFarmDNC : UserControl
+    public partial class ScriptFarmView : UserControl
     {
-        public ScriptFarmDNC(EliteAPI core)
+        public ScriptFarmView()
         {
             InitializeComponent();
-            api = core;
         }
 
         #region Thread - DNC
@@ -249,8 +248,8 @@
                         ItemQuantityByName(jugpet.Text) > 0)
                     {
                         #region Ammo/Ranged Slot
-                        var rangedSlot = InventoryItems.Items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(2).Id.ToString()).Value;
-                        var ammoSlot = InventoryItems.Items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(3).Id.ToString()).Value;
+                        var rangedSlot = InventoryItems.items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(2).Id.ToString()).Value;
+                        var ammoSlot = InventoryItems.items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(3).Id.ToString()).Value;
                         #endregion
 
                         if (Recast.GetAbilityRecast(94) == 0)
@@ -301,8 +300,8 @@
                         Recast.GetAbilityRecast(103) == 0)
                     {
                         #region Ammo/Ranged Slot
-                        var rangedSlot = InventoryItems.Items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(2).Id.ToString()).Value;
-                        var ammoSlot = InventoryItems.Items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(3).Id.ToString()).Value;
+                        var rangedSlot = InventoryItems.items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(2).Id.ToString()).Value;
+                        var ammoSlot = InventoryItems.items.FirstOrDefault(x => x.Key == api.Inventory.GetEquippedItem(3).Id.ToString()).Value;
                         #endregion
 
                         WindowInfo.SendText("/equip Ammo \"" + usedpetfood.Text + "\"");
