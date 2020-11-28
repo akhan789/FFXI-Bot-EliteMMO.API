@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Xml;
-
-namespace EliteMMO.Scripted.Views.ScriptOnEventTool
+﻿namespace EliteMMO.Scripted.Views.ScriptOnEventTool
 {
     using System;
     using EliteMMO.API;
@@ -10,9 +6,6 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
     using System.IO;
     partial class ScriptOnEventToolView
     {
-        public bool botRunning = false;
-        public string fileXML;
-        public string _ext;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -154,7 +147,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.startScriptToolStripMenuItem.Name = "startScriptToolStripMenuItem";
             this.startScriptToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.startScriptToolStripMenuItem.Text = "Start";
-            this.startScriptToolStripMenuItem.Click += new System.EventHandler(this.ToolStartClick);
+            this.startScriptToolStripMenuItem.Click += new System.EventHandler(this.StartScriptToolStripMenuItem_Click);
             // 
             // stopScriptToolStripMenuItem
             // 
@@ -162,7 +155,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.stopScriptToolStripMenuItem.Name = "stopScriptToolStripMenuItem";
             this.stopScriptToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.stopScriptToolStripMenuItem.Text = "Stop";
-            this.stopScriptToolStripMenuItem.Click += new System.EventHandler(this.ToolStopClick);
+            this.stopScriptToolStripMenuItem.Click += new System.EventHandler(this.StopScriptToolStripMenuItem_Click);
             // 
             // executeCommandLabel
             // 
@@ -207,7 +200,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.eventsList.TabIndex = 27;
             this.eventsList.UseCompatibleStateImageBehavior = false;
             this.eventsList.View = System.Windows.Forms.View.Details;
-            this.eventsList.DoubleClick += new System.EventHandler(this.Events_DoubleClick);
+            this.eventsList.DoubleClick += new System.EventHandler(this.EventsList_DoubleClick);
             // 
             // eventTextHeader
             // 
@@ -249,7 +242,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.loadOEToolStripMenuItem.Name = "loadOEToolStripMenuItem";
             this.loadOEToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.loadOEToolStripMenuItem.Text = "Load";
-            this.loadOEToolStripMenuItem.Click += new System.EventHandler(this.LoadOEToolStripMenuItemClick);
+            this.loadOEToolStripMenuItem.Click += new System.EventHandler(this.LoadOEToolStripMenuItem_Click);
             // 
             // saveOEToolStripMenuItem
             // 
@@ -257,7 +250,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.saveOEToolStripMenuItem.Name = "saveOEToolStripMenuItem";
             this.saveOEToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.saveOEToolStripMenuItem.Text = "Save";
-            this.saveOEToolStripMenuItem.Click += new System.EventHandler(this.SaveOEToolStripMenuItemClick);
+            this.saveOEToolStripMenuItem.Click += new System.EventHandler(this.SaveOEToolStripMenuItem_Click);
             // 
             // editSelectedToolStripMenuItem
             // 
@@ -265,7 +258,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.editSelectedToolStripMenuItem.Name = "editSelectedToolStripMenuItem";
             this.editSelectedToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.editSelectedToolStripMenuItem.Text = "Edit Selected";
-            this.editSelectedToolStripMenuItem.Click += new System.EventHandler(this.EditSelectedToolStripMenuItemClick);
+            this.editSelectedToolStripMenuItem.Click += new System.EventHandler(this.EditSelectedToolStripMenuItem_Click);
             // 
             // removeCheckedOEToolStripMenuItem
             // 
@@ -273,7 +266,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.removeCheckedOEToolStripMenuItem.Name = "removeCheckedOEToolStripMenuItem";
             this.removeCheckedOEToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
             this.removeCheckedOEToolStripMenuItem.Text = "Remove Checked";
-            this.removeCheckedOEToolStripMenuItem.Click += new System.EventHandler(this.RemoveCheckedOEToolStripMenuItemClick);
+            this.removeCheckedOEToolStripMenuItem.Click += new System.EventHandler(this.RemoveCheckedOEToolStripMenuItem_Click);
             // 
             // createEvent
             // 
@@ -292,7 +285,7 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
             this.addNewEventToolStripMenuItem.Name = "addNewEventToolStripMenuItem";
             this.addNewEventToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.addNewEventToolStripMenuItem.Text = "Create/Save Event";
-            this.addNewEventToolStripMenuItem.Click += new System.EventHandler(this.AddNewEventToolStripMenuItemClick);
+            this.addNewEventToolStripMenuItem.Click += new System.EventHandler(this.AddNewEventToolStripMenuItem_Click);
             // 
             // chatEvent
             // 
@@ -352,303 +345,5 @@ namespace EliteMMO.Scripted.Views.ScriptOnEventTool
         public System.Windows.Forms.ColumnHeader chatTypeHeader;
         public System.Windows.Forms.ColumnHeader regExHeader;
         public System.Windows.Forms.ToolStripMenuItem editSelectedToolStripMenuItem;
-
-        private void ToolStartClick(object sender, EventArgs e)
-        {
-            botRunning = true;
-
-            startScriptToolStripMenuItem.Enabled = false;
-            stopScriptToolStripMenuItem.Enabled = true;
-
-            if (!bgw_script_events.IsBusy)
-                bgw_script_events.RunWorkerAsync();
-        }
-
-        private void ToolStopClick(object sender, EventArgs e)
-        {
-            botRunning = false;
-
-            startScriptToolStripMenuItem.Enabled = true;
-            stopScriptToolStripMenuItem.Enabled = false;
-
-            bgw_script_events.CancelAsync();
-        }
-
-        private void AddNewEventToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(chatEvent.Text) ||
-                !string.IsNullOrEmpty(executeCommand.Text))
-            {
-                var items = new string[] {chatEvent.Text, executeCommand.Text, chatTypeCombo.Text, useRegEx.Checked.ToString()};
-
-                if (eventsList.SelectedItems.Count > 0)
-                {
-                    var selected = eventsList.SelectedItems[0];
-                    selected.SubItems[0].Text = chatEvent.Text;
-                    selected.SubItems[1].Text = executeCommand.Text;
-                    selected.SubItems[2].Text = chatTypeCombo.Text;
-                    selected.SubItems[3].Text = useRegEx.Checked.ToString();
-                }
-                else
-                {
-                    var item = new ListViewItem(items);
-                    eventsList.Items.Add(item);
-                }
-
-                if (saveOEToolStripMenuItem.Enabled == false)
-                    saveOEToolStripMenuItem.Enabled = true;
-
-                if (removeCheckedOEToolStripMenuItem.Enabled == false)
-                    removeCheckedOEToolStripMenuItem.Enabled = true;
-
-                if (editSelectedToolStripMenuItem.Enabled == false)
-                    editSelectedToolStripMenuItem.Enabled = true;
-
-                chatEvent.Text = "";
-                executeCommand.Text = "";
-
-                if (_ext == ".oef" || _ext == "xml")
-                {
-                    XmlDocument _saveFile = new XmlDocument();
-
-                    XmlNode rootNode = _saveFile.CreateElement("OnEventsList");
-                    _saveFile.AppendChild(rootNode);
-
-                    for (var x = 0; x < eventsList.Items.Count; x++)
-                    {
-                        XmlNode userNode = _saveFile.CreateElement("Event");
-
-                        if (_ext == ".oef")
-                        {
-                            XmlAttribute ChatEvent = _saveFile.CreateAttribute("eventtext");
-                            ChatEvent.Value = eventsList.Items[x].SubItems[0].Text.ToString();
-                            userNode.Attributes.Append(ChatEvent);
-
-                            XmlAttribute EventCommand = _saveFile.CreateAttribute("eventcmd");
-                            EventCommand.Value = eventsList.Items[x].SubItems[1].Text.ToString();
-                            userNode.Attributes.Append(EventCommand);
-
-                            XmlAttribute isChecked = _saveFile.CreateAttribute("eventchecked");
-                            isChecked.Value = eventsList.Items[x].Checked.ToString();
-                            userNode.Attributes.Append(isChecked);
-                        }
-
-                        if (_ext == ".xml")
-                        {
-                            XmlAttribute isChecked = _saveFile.CreateAttribute("isChecked");
-                            isChecked.Value = eventsList.Items[x].Checked.ToString();
-                            rootNode.AppendChild(userNode);
-
-                            XmlAttribute ChatEvent = _saveFile.CreateAttribute("ChatEvent");
-                            ChatEvent.Value = eventsList.Items[x].SubItems[0].Text.ToString();
-                            rootNode.AppendChild(userNode);
-
-                            XmlAttribute EventCommand = _saveFile.CreateAttribute("EventCommand");
-                            EventCommand.Value = eventsList.Items[x].SubItems[1].Text.ToString();
-                            rootNode.AppendChild(userNode);
-
-                            XmlAttribute ChatTypeX = _saveFile.CreateAttribute("ChatType");
-                            ChatTypeX.Value = eventsList.Items[x].SubItems[2].Text.ToString();
-                            rootNode.AppendChild(userNode);
-
-                            XmlAttribute isRegEx = _saveFile.CreateAttribute("isRegEx");
-                            isRegEx.Value = eventsList.Items[x].SubItems[3].Text.ToString();
-                            rootNode.AppendChild(userNode);
-                        }
-
-                        _saveFile.Save(fileXML);
-                    }
-                }
-            }
-        }
-
-        private void Events_DoubleClick(object sender, EventArgs e)
-        {
-            if (eventsList.SelectedItems.Count <= 0) return;
-
-            foreach (ListViewItem selected in eventsList.SelectedItems)
-            {
-                eventsList.Items.Remove(selected);
-            }
-
-            if (eventsList.Items.Count == 0)
-            {
-                saveOEToolStripMenuItem.Enabled = false;
-                removeCheckedOEToolStripMenuItem.Enabled = false;
-                editSelectedToolStripMenuItem.Enabled = false;
-            }
-        }
-
-        private void LoadOEToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-
-            if (Directory.Exists(eventPath) == false)
-                Directory.CreateDirectory(eventPath);
-
-            OpenFileDialog _openFile = new OpenFileDialog();
-            _openFile.Title = "Select OnEvents File To Load";
-            _openFile.InitialDirectory = eventPath;
-            _openFile.Filter = "OnEvent File (*.xml)|*.xml|OnEvent File (*.oef)|*.oef";
-            _openFile.FilterIndex = 1;
-            _openFile.RestoreDirectory = true;
-
-            DialogResult _dlgResult = _openFile.ShowDialog();
-            if (_dlgResult != DialogResult.OK)
-                return;
-
-            fileXML = _openFile.FileName;
-
-            try
-            {
-                eventsList.Items.Clear();
-                var ext = Path.GetExtension(_openFile.FileName);
-                _ext = ext;
-
-                if (ext == ".oef")
-                {
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(_openFile.FileName);
-
-                    XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
-                    XmlNodeList nodeList = mainNode.ChildNodes;
-
-                    for (int x = 0; x < nodeList.Count; x++)
-                    {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["eventtext"].Value.ToString(), 
-                            nodeList[x].Attributes["eventcmd"].Value.ToString(),
-                        }));
-                        string temp = nodeList[x].Attributes["eventchecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
-
-                        eventsList.Items[x].SubItems.Add("ALL");
-                        eventsList.Items[x].SubItems.Add("False");
-                    }
-                }
-                else if (ext == ".xml")
-                {
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(_openFile.FileName);
-
-                    XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
-                    XmlNodeList nodeList = mainNode.ChildNodes;
-
-                    for (var x = 0; x < nodeList.Count; x++)
-                    {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["ChatEvent"].Value.ToString(), 
-                            nodeList[x].Attributes["EventCommand"].Value.ToString(),
-                            nodeList[x].Attributes["ChatType"].Value.ToString(),
-                            nodeList[x].Attributes["isRegEx"].Value.ToString()
-                        }));
-                        
-                        var temp = nodeList[x].Attributes["isChecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
-                    }
-                }
-
-                if (saveOEToolStripMenuItem.Enabled == false)
-                    saveOEToolStripMenuItem.Enabled = true;
-
-                if (removeCheckedOEToolStripMenuItem.Enabled == false)
-                    removeCheckedOEToolStripMenuItem.Enabled = true;
-
-                if (editSelectedToolStripMenuItem.Enabled == false)
-                    editSelectedToolStripMenuItem.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load the OnEvents file. Please try again.\n" + ex.Message);
-                throw;
-            }
-        }
-
-        private void SaveOEToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-            
-            if (Directory.Exists(eventPath) == false)
-                Directory.CreateDirectory(eventPath);
-
-            SaveFileDialog _saveFile = new SaveFileDialog();
-            _saveFile.Title = "Save OnEvents File";
-            _saveFile.InitialDirectory = eventPath;
-            _saveFile.Filter = "OnEvent File (*.xml)|*.xml";
-            _saveFile.FilterIndex = 0;
-            _saveFile.RestoreDirectory = true;
-
-            DialogResult _dlgResult = _saveFile.ShowDialog();
-            if (_dlgResult != DialogResult.OK) return;
-
-            try
-            {
-                XmlTextWriter xmlWriter = new XmlTextWriter(_saveFile.FileName, Encoding.UTF8);
-                xmlWriter.Formatting = Formatting.Indented;
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("OnEventsList");
-
-                for (int i = 0; i < eventsList.Items.Count; i++)
-                {
-                    xmlWriter.WriteStartElement("Event");
-                    xmlWriter.WriteAttributeString("isChecked", eventsList.Items[i].Checked.ToString());
-                    xmlWriter.WriteAttributeString("ChatEvent", eventsList.Items[i].SubItems[0].Text.ToString());
-                    xmlWriter.WriteAttributeString("EventCommand", eventsList.Items[i].SubItems[1].Text.ToString());
-                    xmlWriter.WriteAttributeString("ChatType", eventsList.Items[i].SubItems[2].Text.ToString());
-                    xmlWriter.WriteAttributeString("isRegEx", eventsList.Items[i].SubItems[3].Text.ToString());
-
-                    xmlWriter.WriteEndElement();
-                }
-
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteEndDocument();
-                xmlWriter.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to save OnEvents file. Please try another location.\n" + ex.Message);
-                throw;
-            }
-        }
-
-        private void RemoveCheckedOEToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            foreach (ListViewItem items in eventsList.CheckedItems)
-            {
-                eventsList.Items.Remove(items);
-            }
-
-            if (eventsList.Items.Count == 0)
-            {
-                if (saveOEToolStripMenuItem.Enabled == true)
-                    saveOEToolStripMenuItem.Enabled = false;
-
-                if (removeCheckedOEToolStripMenuItem.Enabled == true)
-                    removeCheckedOEToolStripMenuItem.Enabled = false;
-
-                if (editSelectedToolStripMenuItem.Enabled == true)
-                    editSelectedToolStripMenuItem.Enabled = false;   
-            }
-        }
-
-        private void EditSelectedToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            var i = eventsList.Items.IndexOf(eventsList.SelectedItems[0]);
-
-            chatEvent.Text = eventsList.SelectedItems[0].SubItems[0].Text;
-            executeCommand.Text = eventsList.SelectedItems[0].SubItems[1].Text;
-            chatTypeCombo.Text = eventsList.SelectedItems[0].SubItems[2].Text;
-
-            if (eventsList.SelectedItems[0].SubItems[3].Text.ToString() == "False")
-            {
-                useRegEx.Checked = false;
-            }
-            else
-            {
-                useRegEx.Checked = true;
-            }
-        }
     }
 }

@@ -76,12 +76,28 @@
     <Compile Include="Controller\MainWindow\IMainWindowController.cs" />
     <Compile Include="Controller\MainWindow\MainWindowController.cs" />
     <Compile Include="Controller\IScriptedController.cs" />
+    <Compile Include="Controller\ScriptFarm\IScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptFarm\ScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptHealing\IScriptHealingController.cs" />
+    <Compile Include="Controller\ScriptHealing\ScriptHealingController.cs" />
+    <Compile Include="Controller\ScriptNaviMap\IScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptNaviMap\ScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptOnEventTool\IScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptOnEventTool\ScriptFarmController.cs" />
     <Compile Include="Embedded\InventoryItems.cs" />
     <Compile Include="Embedded\SigScan.cs" />
     <Compile Include="Models\AbstractScriptedModel.cs" />
     <Compile Include="Models\MainWindow\IMainWindowModel.cs" />
     <Compile Include="Models\IScriptedModel.cs" />
     <Compile Include="Models\MainWindow\MainWindowModel.cs" />
+    <Compile Include="Models\ScriptFarm\IScriptFarmModel.cs" />
+    <Compile Include="Models\ScriptFarm\ScriptFarmModel.cs" />
+    <Compile Include="Models\ScriptHealing\IScriptHealingModel.cs" />
+    <Compile Include="Models\ScriptHealing\ScriptHealingModel.cs" />
+    <Compile Include="Models\ScriptNaviMap\IScriptNaviMap.cs" />
+    <Compile Include="Models\ScriptNaviMap\ScriptNaviMap.cs" />
+    <Compile Include="Models\ScriptOnEventTool\IScriptOnEventToolModel.cs" />
+    <Compile Include="Models\ScriptOnEventTool\ScriptOnEventToolModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EliteMMOApiUtils.cs" />
@@ -93,28 +109,32 @@
     <Compile Include="Views\MainWindow\MainWindowView.Designer.cs">
       <DependentUpon>MainWindowView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ScriptFarm\IScriptFarmView.cs" />
     <Compile Include="Views\ScriptFarm\ScriptFarmView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\ScriptFarm\ScriptFarmView.Designer.cs">
       <DependentUpon>ScriptFarmView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ScriptHealing\IScriptHealingView.cs" />
     <Compile Include="Views\ScriptHealing\ScriptHealingView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\ScriptHealing\ScriptHealingView.Designer.cs">
       <DependentUpon>ScriptHealingView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScriptNaviMapView.cs">
+    <Compile Include="Views\ScriptNaviMap\IScriptNaviMapView.cs" />
+    <Compile Include="Views\ScriptNaviMap\ScriptNaviMapView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ScriptNaviMapView.Designer.cs">
+    <Compile Include="Views\ScriptNaviMap\ScriptNaviMapView.Designer.cs">
       <DependentUpon>ScriptNaviMapView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScriptOnEventToolView.cs">
+    <Compile Include="Views\ScriptOnEventTool\IScriptOnEventToolView.cs" />
+    <Compile Include="Views\ScriptOnEventTool\ScriptOnEventToolView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ScriptOnEventToolView.Designer.cs">
+    <Compile Include="Views\ScriptOnEventTool\ScriptOnEventToolView.Designer.cs">
       <DependentUpon>ScriptOnEventToolView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -136,10 +156,10 @@
     <EmbeddedResource Include="Views\ScriptHealing\ScriptHealingView.resx">
       <DependentUpon>ScriptHealingView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ScriptNaviMapView.resx">
+    <EmbeddedResource Include="Views\ScriptNaviMap\ScriptNaviMapView.resx">
       <DependentUpon>ScriptNaviMapView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ScriptOnEventToolView.resx">
+    <EmbeddedResource Include="Views\ScriptOnEventTool\ScriptOnEventToolView.resx">
       <DependentUpon>ScriptOnEventToolView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

@@ -30,3 +30,7 @@ C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Script
 C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptNaviMapView.resources
 C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptOnEventToolView.resources
 C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.MainWindow.MainWindowView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptFarm.ScriptFarmView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptNaviMap.ScriptNaviMapView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptOnEventTool.ScriptOnEventToolView.resources
+C:\Program Files (x86)\PlayOnline\Scripted\FFXI-Bot-EliteMMO.API\EliteMMO.Scripted\obj\Debug\EliteMMO.Scripted.Views.ScriptHealing.ScriptHealingView.resources

@@ -7,7 +7,9 @@
     using System.Drawing;
     using EliteMMO.Scripted.Models;
     using EliteMMO.Scripted.Views.ScriptFarm;
+    using EliteMMO.Scripted.Views.ScriptHealing;
     using EliteMMO.Scripted.Views.ScriptNaviMap;
+    using EliteMMO.Scripted.Views.ScriptOnEventTool;
 
     public partial class MainWindowView : Form, IMainWindowView
     {

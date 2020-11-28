@@ -1,4 +1,4 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.ScriptHealing
 {
     using EliteMMO.API;
     partial class ScriptHealingView
