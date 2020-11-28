@@ -1,7 +1,6 @@
 ﻿namespace EliteMMO.Scripted.Embedded
 {
     using System.Collections.Generic;
-    using API;
     using EliteMMO.Scripted.Utilities;
 
     public class InventoryItems

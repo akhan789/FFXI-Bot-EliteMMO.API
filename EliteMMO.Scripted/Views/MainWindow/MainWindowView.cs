@@ -1,13 +1,13 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.MainWindow
 {
     using System.Windows.Forms;
-    using System.Diagnostics;
     using System.Linq;
-    using Utilities;
-    using EliteMMO.Scripted.Models;
+    using EliteMMO.Scripted.Models.MainWindow;
     using EliteMMO.Scripted.Controller.MainWindow;
-    using System;
     using System.Drawing;
+    using EliteMMO.Scripted.Models;
+    using EliteMMO.Scripted.Views.ScriptFarm;
+    using EliteMMO.Scripted.Views.ScriptNaviMap;
 
     public partial class MainWindowView : Form, IMainWindowView
     {
@@ -55,9 +55,9 @@
                 switch (mainWindowModel.MainView)
                 {
                     case MainWindowModel.Function.REFRESH_CHARACTERS:
-                        EliteMMO_PROC.Items.Clear();
-                        EliteMMO_PROC.Items.AddRange(mainWindowModel.CurrentProcesses.Select(process => process.MainWindowTitle).ToArray<string>());
-                        EliteMMO_PROC.SelectedItem = mainWindowModel.SelectedProcess.MainWindowTitle;
+                        eliteMMOProcesses.Items.Clear();
+                        eliteMMOProcesses.Items.AddRange(mainWindowModel.CurrentProcesses.Select(process => process.MainWindowTitle).ToArray<string>());
+                        eliteMMOProcesses.SelectedItem = mainWindowModel.SelectedProcess.MainWindowTitle;
                         break;
                     case MainWindowModel.Function.LOAD_FARM_VIEW:
                         farmView.Dock = DockStyle.Fill;
@@ -115,62 +115,62 @@
 
         public void HidePictureBox()
         {
-            xpic.Hide();
+            pictureBox.Hide();
         }
 
         public void ShowPictureBox()
         {
-            xpic.Show();
+            pictureBox.Show();
         }
 
         public void HideHeader1()
         {
-            header1.Hide();
+            scriptedHeader.Hide();
         }
 
         public void ShowHeader1()
         {
-            header1.Show();
+            scriptedHeader.Show();
         }
 
         public void HideHeader2()
         {
-            header2.Hide();
+            scriptedSubHeader.Hide();
         }
 
         public void ShowHeader2()
         {
-            header2.Show();
+            scriptedSubHeader.Show();
         }
 
-        public void HideLabel1()
+        public void HideSelectProcessLabel()
         {
-            label1.Hide();
+            selectProcessLabel.Hide();
         }
 
-        public void ShowLabel1()
+        public void ShowSelectProcessLabel()
         {
-            label1.Show();
+            selectProcessLabel.Show();
         }
 
         public void HideButton1()
         {
-            button1.Hide();
+            donateButton.Hide();
         }
 
         public void ShowButton1()
         {
-            button1.Show();
+            donateButton.Show();
         }
 
         public void HideEliteMMO_PROC()
         {
-            EliteMMO_PROC.Hide();
+            eliteMMOProcesses.Hide();
         }
 
         public void ShowEliteMMO_PROC()
         {
-            EliteMMO_PROC.Show();
+            eliteMMOProcesses.Show();
         }
 
         public void HideFarmView()

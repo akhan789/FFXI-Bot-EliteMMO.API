@@ -1,4 +1,4 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.ScriptOnEventTool
 {
     using System;
     using System.Windows.Forms;

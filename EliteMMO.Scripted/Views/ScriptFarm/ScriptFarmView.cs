@@ -1,4 +1,4 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.ScriptFarm
 {
     using System;
     using System.Windows.Forms;
@@ -20,7 +20,7 @@
 
             while (botRunning && !bgw_script_dnc.CancellationPending)
             {
-                if (DeathWarp.Checked && (PlayerInfo.Status == 2 || PlayerInfo.Status == 3))
+                if (deathWarp.Checked && (PlayerInfo.Status == 2 || PlayerInfo.Status == 3))
                     PlayerDead();
 
                 if (followplayer.Checked && PlayerInfo.Status == 0)
@@ -32,7 +32,7 @@
                 if (aggro.Checked && PlayerInfo.Status == 0 && !isPulled)
                     DetectAggro();
 
-                if (PlayerInfo.Status == 0 && !isPulled && SelectedTargets.Items.Count != 0)
+                if (PlayerInfo.Status == 0 && !isPulled && selectedTargets.Items.Count != 0)
                     FindTarget();
 
                 while (PlayerInfo.Status == 1 && botRunning && TargetInfo.ID > 0)
@@ -48,7 +48,7 @@
                     #region Check Target Distance
                     if (mobdist.Checked)
                     {
-                        if (TargetInfo.Distance >= (float)KeepTargetRange.Value && TargetInfo.HPP > 1)
+                        if (TargetInfo.Distance >= (float)keepTargetRange.Value && TargetInfo.HPP > 1)
                         {
                             isMoving = true;
                             while (TargetMoving() && PlayerInfo.Status == 1 && botRunning)
@@ -56,7 +56,7 @@
                                 Thread.Sleep(TimeSpan.FromSeconds(0.1));
                             }
 
-                            while (TargetInfo.Distance >= (float)KeepTargetRange.Value &&
+                            while (TargetInfo.Distance >= (float)keepTargetRange.Value &&
                                    TargetInfo.HPP > 1 && PlayerInfo.Status == 1 && botRunning)
                             {
                                 api.AutoFollow.SetAutoFollowCoords(TargetInfo.X - PlayerInfo.X,
@@ -204,11 +204,11 @@
                 if (usenav.Checked && api.AutoFollow.IsAutoFollowing && !naviMove)
                     api.AutoFollow.IsAutoFollowing = false;
 
-                if (ScanDelay.Checked && !naviMove)
+                if (scanDelay.Checked && !naviMove)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds((double)numericUpDown38.Value));
                 }
-                else if (!ScanDelay.Checked)
+                else if (!scanDelay.Checked)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(scanInterval));
                 }
@@ -323,10 +323,10 @@
                         #endregion
                     }
 
-                    if (PetJA.Items.Count == 0 && PetInfo.ID != 0)
+                    if (petJA.Items.Count == 0 && PetInfo.ID != 0)
                         BSTGetJA();
 
-                    if (PetInfo.ID > 0 && PetJA.Items.Count > 0 && PetInfo.Status == 1 && 
+                    if (PetInfo.ID > 0 && petJA.Items.Count > 0 && PetInfo.Status == 1 && 
                         PetInfo.TPP > 1000 && TargetInfo.ID > 0)
                     {
                         PetReadyJA();
@@ -336,7 +336,7 @@
                 #region pet: DRG
                 if (PlayerInfo.MainJob == 14 || PlayerInfo.SubJob == 14)
                 {
-                    if (PetInfo.ID == 0 && CallWyvern.Checked &&
+                    if (PetInfo.ID == 0 && callWyvern.Checked &&
                         Recast.GetAbilityRecast(163) == 0)
                     {
                         WindowInfo.SendText("/ja \"Call Wyvern\" <me>");
@@ -369,7 +369,7 @@
                 if (naviMove && usenav.Checked && selectedNavi.Text != "" && PlayerInfo.Status == 0 &&
                    (!PlayerInfo.HasBuff(10) || !PlayerInfo.HasBuff(11) || !PlayerInfo.HasBuff(0)))
                 {
-                    if (Circular.Checked && !runReverse.Checked)
+                    if (circular.Checked && !runReverse.Checked)
                     {
                         var closestWayPoint = FindClosestWayPoint();
 

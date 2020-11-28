@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EliteMMO.Scripted.Views
+namespace EliteMMO.Scripted.Views.MainWindow
 {
     public interface IMainWindowView : IScriptedView
     {
@@ -13,8 +13,8 @@ namespace EliteMMO.Scripted.Views
         void ShowHeader1();
         void HideHeader2();
         void ShowHeader2();
-        void HideLabel1();
-        void ShowLabel1();
+        void HideSelectProcessLabel();
+        void ShowSelectProcessLabel();
         void HideButton1();
         void ShowButton1();
         void HideEliteMMO_PROC();

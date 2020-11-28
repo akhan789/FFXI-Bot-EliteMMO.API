@@ -1,4 +1,4 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.MainWindow
 {
     using System.Windows.Forms;
     using API;
@@ -63,17 +63,17 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xstatus = new System.Windows.Forms.StatusStrip();
+            this.status = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.header2 = new System.Windows.Forms.Label();
-            this.header1 = new System.Windows.Forms.Label();
-            this.xpic = new System.Windows.Forms.PictureBox();
-            this.EliteMMO_PROC = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.scriptedSubHeader = new System.Windows.Forms.Label();
+            this.scriptedHeader = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.eliteMMOProcesses = new System.Windows.Forms.ComboBox();
+            this.selectProcessLabel = new System.Windows.Forms.Label();
+            this.donateButton = new System.Windows.Forms.Button();
             this.xmenu.SuspendLayout();
-            this.xstatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xpic)).BeginInit();
+            this.status.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // xmenu
@@ -156,13 +156,13 @@
             this.navigationToolStripMenuItem,
             this.onEventToolStripMenuItem});
             this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scriptsToolStripMenuItem.Text = "Scripts";
             // 
             // farmToolStripMenuItem
             // 
             this.farmToolStripMenuItem.Name = "farmToolStripMenuItem";
-            this.farmToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.farmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.farmToolStripMenuItem.Text = "Farm";
             this.farmToolStripMenuItem.Click += new System.EventHandler(this.FarmToolStripMenuItemClick);
             // 
@@ -170,7 +170,7 @@
             // 
             this.healingSupportToolStripMenuItem.Enabled = false;
             this.healingSupportToolStripMenuItem.Name = "healingSupportToolStripMenuItem";
-            this.healingSupportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.healingSupportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.healingSupportToolStripMenuItem.Text = "Healing Support";
             this.healingSupportToolStripMenuItem.Click += new System.EventHandler(this.HealingSupportToolStripMenuItemClick);
             // 
@@ -178,7 +178,7 @@
             // 
             this.skillupToolStripMenuItem.Enabled = false;
             this.skillupToolStripMenuItem.Name = "skillupToolStripMenuItem";
-            this.skillupToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.skillupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.skillupToolStripMenuItem.Text = "Skillup";
             this.skillupToolStripMenuItem.Visible = false;
             // 
@@ -186,7 +186,7 @@
             // 
             this.synergyToolStripMenuItem.Enabled = false;
             this.synergyToolStripMenuItem.Name = "synergyToolStripMenuItem";
-            this.synergyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.synergyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.synergyToolStripMenuItem.Text = "Synergy";
             this.synergyToolStripMenuItem.Visible = false;
             // 
@@ -194,7 +194,7 @@
             // 
             this.buySellTradeToolStripMenuItem.Enabled = false;
             this.buySellTradeToolStripMenuItem.Name = "buySellTradeToolStripMenuItem";
-            this.buySellTradeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.buySellTradeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.buySellTradeToolStripMenuItem.Text = "Buy/Sell/Trade";
             this.buySellTradeToolStripMenuItem.Visible = false;
             // 
@@ -202,13 +202,13 @@
             // 
             this.navigationToolStripMenuItem.Enabled = false;
             this.navigationToolStripMenuItem.Name = "navigationToolStripMenuItem";
-            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.navigationToolStripMenuItem.Text = "Navigation";
             // 
             // onEventToolStripMenuItem
             // 
             this.onEventToolStripMenuItem.Name = "onEventToolStripMenuItem";
-            this.onEventToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.onEventToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.onEventToolStripMenuItem.Text = "On Event Tool";
             this.onEventToolStripMenuItem.Click += new System.EventHandler(this.OnEventToolStripMenuItemClick);
             // 
@@ -221,7 +221,7 @@
             this.zaldonToolStripMenuItem});
             this.questsToolStripMenuItem.Enabled = false;
             this.questsToolStripMenuItem.Name = "questsToolStripMenuItem";
-            this.questsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.questsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.questsToolStripMenuItem.Text = "Quests";
             this.questsToolStripMenuItem.Visible = false;
             // 
@@ -257,7 +257,7 @@
             this.enableMaintenanceModeToolStripMenuItem});
             this.optionsToolStripMenuItem.Enabled = false;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // stayOnTopToolStripMenuItem
@@ -291,118 +291,118 @@
             // 
             this.fAQToolStripMenuItem.Enabled = false;
             this.fAQToolStripMenuItem.Name = "fAQToolStripMenuItem";
-            this.fAQToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.fAQToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fAQToolStripMenuItem.Text = "FAQ";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
-            // xstatus
+            // status
             // 
-            this.xstatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel});
-            this.xstatus.Location = new System.Drawing.Point(0, 187);
-            this.xstatus.Name = "xstatus";
-            this.xstatus.Size = new System.Drawing.Size(366, 22);
-            this.xstatus.TabIndex = 3;
-            this.xstatus.Text = "xstatus";
+            this.status.Location = new System.Drawing.Point(0, 187);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(366, 22);
+            this.status.TabIndex = 3;
+            this.status.Text = "xstatus";
             // 
             // StatusLabel
             // 
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // header2
+            // scriptedSubHeader
             // 
-            this.header2.AutoSize = true;
-            this.header2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.header2.Location = new System.Drawing.Point(251, 50);
-            this.header2.Name = "header2";
-            this.header2.Size = new System.Drawing.Size(107, 14);
-            this.header2.TabIndex = 12;
-            this.header2.Text = "by cmalo/vicrelant";
+            this.scriptedSubHeader.AutoSize = true;
+            this.scriptedSubHeader.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scriptedSubHeader.Location = new System.Drawing.Point(222, 52);
+            this.scriptedSubHeader.Name = "scriptedSubHeader";
+            this.scriptedSubHeader.Size = new System.Drawing.Size(132, 28);
+            this.scriptedSubHeader.TabIndex = 12;
+            this.scriptedSubHeader.Text = "by cmalo/vicrelant\r\nmodified by Solidwater";
             // 
-            // header1
+            // scriptedHeader
             // 
-            this.header1.AutoSize = true;
-            this.header1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.header1.Location = new System.Drawing.Point(170, 32);
-            this.header1.Name = "header1";
-            this.header1.Size = new System.Drawing.Size(170, 20);
-            this.header1.TabIndex = 11;
-            this.header1.Text = "Scripted (c) 2014/2015";
+            this.scriptedHeader.AutoSize = true;
+            this.scriptedHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scriptedHeader.Location = new System.Drawing.Point(170, 32);
+            this.scriptedHeader.Name = "scriptedHeader";
+            this.scriptedHeader.Size = new System.Drawing.Size(130, 20);
+            this.scriptedHeader.TabIndex = 11;
+            this.scriptedHeader.Text = "Scripted (c) 2020";
             // 
-            // xpic
+            // pictureBox
             // 
-            this.xpic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xpic.Image = global::EliteMMO.Scripted.Properties.Resources.xeyes_1_128x128x32;
-            this.xpic.Location = new System.Drawing.Point(0, 24);
-            this.xpic.Name = "xpic";
-            this.xpic.Size = new System.Drawing.Size(366, 163);
-            this.xpic.TabIndex = 4;
-            this.xpic.TabStop = false;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Image = global::EliteMMO.Scripted.Properties.Resources.xeyes_1_128x128x32;
+            this.pictureBox.Location = new System.Drawing.Point(0, 24);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(366, 163);
+            this.pictureBox.TabIndex = 4;
+            this.pictureBox.TabStop = false;
             // 
-            // EliteMMO_PROC
+            // eliteMMOProcesses
             // 
-            this.EliteMMO_PROC.FormattingEnabled = true;
-            this.EliteMMO_PROC.Location = new System.Drawing.Point(11, 160);
-            this.EliteMMO_PROC.Name = "EliteMMO_PROC";
-            this.EliteMMO_PROC.Size = new System.Drawing.Size(136, 21);
-            this.EliteMMO_PROC.TabIndex = 14;
-            this.EliteMMO_PROC.TabStop = false;
-            this.EliteMMO_PROC.SelectedIndexChanged += new System.EventHandler(this.EliteMmoProcSelectedIndexChanged);
+            this.eliteMMOProcesses.FormattingEnabled = true;
+            this.eliteMMOProcesses.Location = new System.Drawing.Point(11, 160);
+            this.eliteMMOProcesses.Name = "eliteMMOProcesses";
+            this.eliteMMOProcesses.Size = new System.Drawing.Size(136, 21);
+            this.eliteMMOProcesses.TabIndex = 14;
+            this.eliteMMOProcesses.TabStop = false;
+            this.eliteMMOProcesses.SelectedIndexChanged += new System.EventHandler(this.EliteMmoProcSelectedIndexChanged);
             // 
-            // label1
+            // selectProcessLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "select process";
+            this.selectProcessLabel.AutoSize = true;
+            this.selectProcessLabel.Location = new System.Drawing.Point(11, 146);
+            this.selectProcessLabel.Name = "selectProcessLabel";
+            this.selectProcessLabel.Size = new System.Drawing.Size(75, 13);
+            this.selectProcessLabel.TabIndex = 15;
+            this.selectProcessLabel.Text = "select process";
             // 
-            // button1
+            // donateButton
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(173, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(185, 27);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Donate";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.PaypalClick);
+            this.donateButton.BackColor = System.Drawing.Color.White;
+            this.donateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.donateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.donateButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.donateButton.Location = new System.Drawing.Point(174, 156);
+            this.donateButton.Name = "donateButton";
+            this.donateButton.Size = new System.Drawing.Size(185, 27);
+            this.donateButton.TabIndex = 16;
+            this.donateButton.Text = "Donate";
+            this.donateButton.UseVisualStyleBackColor = false;
+            this.donateButton.Click += new System.EventHandler(this.PaypalClick);
             // 
             // MainWindowView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 209);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.EliteMMO_PROC);
-            this.Controls.Add(this.header2);
-            this.Controls.Add(this.header1);
-            this.Controls.Add(this.xpic);
-            this.Controls.Add(this.xstatus);
+            this.Controls.Add(this.donateButton);
+            this.Controls.Add(this.selectProcessLabel);
+            this.Controls.Add(this.eliteMMOProcesses);
+            this.Controls.Add(this.scriptedSubHeader);
+            this.Controls.Add(this.scriptedHeader);
+            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.xmenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindowView";
-            this.Text = "scripted  - (open ßeta v0.37)";
+            this.Text = "Scripted  - by Solidwater";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.xmenu.ResumeLayout(false);
             this.xmenu.PerformLayout();
-            this.xstatus.ResumeLayout(false);
-            this.xstatus.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xpic)).EndInit();
+            this.status.ResumeLayout(false);
+            this.status.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,18 +433,18 @@
         public System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem fAQToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        public System.Windows.Forms.StatusStrip xstatus;
+        public System.Windows.Forms.StatusStrip status;
         public System.Windows.Forms.ToolStripStatusLabel StatusLabel;
-        public System.Windows.Forms.PictureBox xpic;
-        public System.Windows.Forms.Label header2;
-        public System.Windows.Forms.Label header1;
-        public System.Windows.Forms.ComboBox EliteMMO_PROC;
+        public System.Windows.Forms.PictureBox pictureBox;
+        public System.Windows.Forms.Label scriptedSubHeader;
+        public System.Windows.Forms.Label scriptedHeader;
+        public System.Windows.Forms.ComboBox eliteMMOProcesses;
         public System.Windows.Forms.ToolStripMenuItem refreshCharactersToolStripMenuItem;
-        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label selectProcessLabel;
         public ToolStripMenuItem minimizeToSysTrayToolStripMenuItem;
         public ToolStripMenuItem enableMaintenanceModeToolStripMenuItem;
         public ToolStripMenuItem navigationToolStripMenuItem;
         private ToolStripMenuItem onEventToolStripMenuItem;
-        private Button button1;
+        private Button donateButton;
     }
 }

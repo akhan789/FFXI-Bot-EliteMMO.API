@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace EliteMMO.Scripted.Models
+namespace EliteMMO.Scripted.Models.MainWindow
 {
     public class MainWindowModel : AbstractScriptedModel, IMainWindowModel
     {

@@ -3,6 +3,8 @@ using EliteMMO.Scripted.Views;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Linq;
+using EliteMMO.Scripted.Models.MainWindow;
+using EliteMMO.Scripted.Views.MainWindow;
 
 namespace EliteMMO.Scripted.Controller.MainWindow
 {
@@ -121,7 +123,7 @@ namespace EliteMMO.Scripted.Controller.MainWindow
                     mainWindowView.ShowPictureBox();
                     mainWindowView.ShowHeader1();
                     mainWindowView.ShowHeader2();
-                    mainWindowView.ShowLabel1();
+                    mainWindowView.ShowSelectProcessLabel();
                     mainWindowView.ShowButton1();
                     mainWindowView.ShowEliteMMO_PROC();
                     mainWindowView.HideOnEventToolView();
@@ -135,7 +137,7 @@ namespace EliteMMO.Scripted.Controller.MainWindow
                     mainWindowView.HidePictureBox();
                     mainWindowView.HideHeader1();
                     mainWindowView.HideHeader2();
-                    mainWindowView.HideLabel1();
+                    mainWindowView.HideSelectProcessLabel();
                     mainWindowView.HideButton1();
                     mainWindowView.HideEliteMMO_PROC();
                     if (function == MainWindowModel.Function.LOAD_FARM_VIEW)

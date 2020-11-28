@@ -1,4 +1,4 @@
-﻿namespace EliteMMO.Scripted.Views
+﻿namespace EliteMMO.Scripted.Views.ScriptNaviMap
 {
     using EliteMMO.API;
     partial class ScriptNaviMapView
@@ -259,16 +259,16 @@
             this.Linear.Text = "Linear Path";
             this.Linear.UseVisualStyleBackColor = true;
             // 
-            // Circular
+            // circular
             // 
             this.Circular.AutoSize = true;
             this.Circular.Checked = true;
             this.Circular.Location = new System.Drawing.Point(12, 22);
-            this.Circular.Name = "Circular";
+            this.Circular.Name = "circular";
             this.Circular.Size = new System.Drawing.Size(85, 17);
             this.Circular.TabIndex = 33;
             this.Circular.TabStop = true;
-            this.Circular.Text = "Circular Path";
+            this.Circular.Text = "circular Path";
             this.Circular.UseVisualStyleBackColor = true;
             // 
             // ScriptNaviMap

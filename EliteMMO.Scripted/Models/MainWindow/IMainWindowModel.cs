@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace EliteMMO.Scripted.Models
+namespace EliteMMO.Scripted.Models.MainWindow
 {
     public interface IMainWindowModel : IScriptedModel
     {

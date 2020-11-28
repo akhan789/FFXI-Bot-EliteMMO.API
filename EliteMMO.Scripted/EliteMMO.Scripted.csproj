@@ -79,30 +79,30 @@
     <Compile Include="Embedded\InventoryItems.cs" />
     <Compile Include="Embedded\SigScan.cs" />
     <Compile Include="Models\AbstractScriptedModel.cs" />
-    <Compile Include="Models\IMainWindowModel.cs" />
+    <Compile Include="Models\MainWindow\IMainWindowModel.cs" />
     <Compile Include="Models\IScriptedModel.cs" />
-    <Compile Include="Models\MainWindowModel.cs" />
+    <Compile Include="Models\MainWindow\MainWindowModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EliteMMOApiUtils.cs" />
-    <Compile Include="Views\IMainWindowView.cs" />
+    <Compile Include="Views\MainWindow\IMainWindowView.cs" />
     <Compile Include="Views\IScriptedView.cs" />
-    <Compile Include="Views\MainWindowView.cs">
+    <Compile Include="Views\MainWindow\MainWindowView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MainWindowView.Designer.cs">
+    <Compile Include="Views\MainWindow\MainWindowView.Designer.cs">
       <DependentUpon>MainWindowView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScriptFarmView.cs">
+    <Compile Include="Views\ScriptFarm\ScriptFarmView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ScriptFarmView.Designer.cs">
+    <Compile Include="Views\ScriptFarm\ScriptFarmView.Designer.cs">
       <DependentUpon>ScriptFarmView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScriptHealingView.cs">
+    <Compile Include="Views\ScriptHealing\ScriptHealingView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ScriptHealingView.Designer.cs">
+    <Compile Include="Views\ScriptHealing\ScriptHealingView.Designer.cs">
       <DependentUpon>ScriptHealingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ScriptNaviMapView.cs">
@@ -127,13 +127,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\MainWindowView.resx">
+    <EmbeddedResource Include="Views\MainWindow\MainWindowView.resx">
       <DependentUpon>MainWindowView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ScriptFarmView.resx">
+    <EmbeddedResource Include="Views\ScriptFarm\ScriptFarmView.resx">
       <DependentUpon>ScriptFarmView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ScriptHealingView.resx">
+    <EmbeddedResource Include="Views\ScriptHealing\ScriptHealingView.resx">
       <DependentUpon>ScriptHealingView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ScriptNaviMapView.resx">

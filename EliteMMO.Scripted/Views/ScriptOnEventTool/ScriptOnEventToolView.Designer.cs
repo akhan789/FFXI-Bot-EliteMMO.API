@@ -2,7 +2,7 @@
 using System.Text;
 using System.Xml;
 
-namespace EliteMMO.Scripted.Views
+namespace EliteMMO.Scripted.Views.ScriptOnEventTool
 {
     using System;
     using EliteMMO.API;
