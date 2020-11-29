@@ -8,6 +8,5 @@ namespace EliteMMO.Scripted.Views
 {
     public interface IScriptedView
     {
-        void Update(IScriptedModel model);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace EliteMMO.Scripted.Views.ScriptNaviMap
 {
     using System.Windows.Forms;
-    public partial class ScriptNaviMapView : UserControl
+    public partial class ScriptNaviMapView : UserControl, IScriptNaviMapView
     {
         public ScriptNaviMapView()
         {

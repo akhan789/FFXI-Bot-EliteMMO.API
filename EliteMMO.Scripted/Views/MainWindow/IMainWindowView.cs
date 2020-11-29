@@ -7,28 +7,26 @@ namespace EliteMMO.Scripted.Views.MainWindow
 {
     public interface IMainWindowView : IScriptedView
     {
-        void HidePictureBox();
-        void ShowPictureBox();
-        void HideHeader1();
-        void ShowHeader1();
-        void HideHeader2();
-        void ShowHeader2();
-        void HideSelectProcessLabel();
-        void ShowSelectProcessLabel();
-        void HideButton1();
-        void ShowButton1();
-        void HideEliteMMO_PROC();
-        void ShowEliteMMO_PROC();
-        void HideFarmView();
-        void ShowFarmView();
-        void HideHealingSupportView();
-        void ShowHealingSupportView();
-        void HideNaviMapView();
-        void ShowNaviMapView();
-        void HideOnEventToolView();
-        void ShowOnEventToolView();
+        void addControl(string control);
         void SetSize(int width, int height);
-        void EnableRefreshCharacters();
-        void DisableRefreshCharacters();
+        string StatusLabelText { get; set; }
+        bool ShowPictureBox { get; set; }
+        bool ShowScriptedHeader { get; set; }
+        bool ShowScriptedSubHeader { get; set; }
+        bool ShowSelectProcessLabel { get; set; }
+        bool ShowDonateButton { get; set; }
+        bool ShowEliteMMOProcesses { get; set; }
+        void ClearEliteMMOProcesses();
+        void AddEliteMMOProcesses(string[] mainWindowTitles);
+        string SelectedItemEliteMMOProcesses { get; set; }
+        bool ShowScriptFarmView { get; set; }
+        string DockStyleScriptFarmView { get; set; }
+        bool ShowScriptHealingSupportView { get; set; }
+        string DockStyleScriptHealingSupportView { get; set; }
+        bool ShowScriptNaviMapView { get; set; }
+        string DockStyleScriptNaviMapView { get; set; }
+        bool ShowScriptOnEventToolView { get; set; }
+        string DockStyleScriptOnEventToolView { get; set; }
+        bool EnableRefreshCharacters { get; set; }
     }
 }

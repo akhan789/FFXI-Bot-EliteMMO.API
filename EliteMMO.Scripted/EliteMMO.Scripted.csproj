@@ -80,10 +80,10 @@
     <Compile Include="Controller\ScriptFarm\ScriptFarmController.cs" />
     <Compile Include="Controller\ScriptHealing\IScriptHealingController.cs" />
     <Compile Include="Controller\ScriptHealing\ScriptHealingController.cs" />
-    <Compile Include="Controller\ScriptNaviMap\IScriptFarmController.cs" />
-    <Compile Include="Controller\ScriptNaviMap\ScriptFarmController.cs" />
-    <Compile Include="Controller\ScriptOnEventTool\IScriptFarmController.cs" />
-    <Compile Include="Controller\ScriptOnEventTool\ScriptFarmController.cs" />
+    <Compile Include="Controller\ScriptNaviMap\IScriptNaviMapController.cs" />
+    <Compile Include="Controller\ScriptNaviMap\ScriptNaviMapController.cs" />
+    <Compile Include="Controller\ScriptOnEventTool\IScriptOnEventToolController.cs" />
+    <Compile Include="Controller\ScriptOnEventTool\ScriptOnEventToolController.cs" />
     <Compile Include="Embedded\InventoryItems.cs" />
     <Compile Include="Embedded\SigScan.cs" />
     <Compile Include="Models\AbstractScriptedModel.cs" />

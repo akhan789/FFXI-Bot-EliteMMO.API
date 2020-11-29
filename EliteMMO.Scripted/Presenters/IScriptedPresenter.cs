@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EliteMMO.Scripted.Controller
+namespace EliteMMO.Scripted.Presenters
 {
-    public interface IScriptedController
+    public interface IScriptedPresenter
     {
-        void SetModel(IScriptedModel model);
-        void SetView(IScriptedView view);
     }
 }

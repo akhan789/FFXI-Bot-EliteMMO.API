@@ -4,10 +4,10 @@
     using API;
     partial class MainWindowView
     {
-        private readonly UserControl farmView;
-        private readonly UserControl healingSupportView;
-        private readonly UserControl naviMapView;
-        private readonly UserControl onEventToolView;
+        private readonly UserControl scriptFarmView;
+        private readonly UserControl scriptHealingSupportView;
+        private readonly UserControl scriptNaviMapView;
+        private readonly UserControl scriptOnEventToolView;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -35,7 +35,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindowView));
-            this.xmenu = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,30 +63,30 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.status = new System.Windows.Forms.StatusStrip();
-            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.scriptedSubHeader = new System.Windows.Forms.Label();
             this.scriptedHeader = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.eliteMMOProcesses = new System.Windows.Forms.ComboBox();
             this.selectProcessLabel = new System.Windows.Forms.Label();
             this.donateButton = new System.Windows.Forms.Button();
-            this.xmenu.SuspendLayout();
-            this.status.SuspendLayout();
+            this.menuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // xmenu
+            // menuStrip
             // 
-            this.xmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.xmenu.Location = new System.Drawing.Point(0, 0);
-            this.xmenu.Name = "xmenu";
-            this.xmenu.Size = new System.Drawing.Size(366, 24);
-            this.xmenu.TabIndex = 2;
-            this.xmenu.Text = "xmenu";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(366, 24);
+            this.menuStrip.TabIndex = 2;
+            this.menuStrip.Text = "xmenu";
             // 
             // fileToolStripMenuItem
             // 
@@ -104,34 +104,34 @@
             // 
             this.loadSettingsToolStripMenuItem.Enabled = false;
             this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
-            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.loadSettingsToolStripMenuItem.Text = "Load Settings";
             // 
             // saveSettingsToolStripMenuItem
             // 
             this.saveSettingsToolStripMenuItem.Enabled = false;
             this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
-            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.saveSettingsToolStripMenuItem.Text = "Save Settings";
             // 
             // resetSettingsToolStripMenuItem
             // 
             this.resetSettingsToolStripMenuItem.Enabled = false;
             this.resetSettingsToolStripMenuItem.Name = "resetSettingsToolStripMenuItem";
-            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.resetSettingsToolStripMenuItem.Text = "Reset Settings";
             // 
             // refreshCharactersToolStripMenuItem
             // 
             this.refreshCharactersToolStripMenuItem.Name = "refreshCharactersToolStripMenuItem";
-            this.refreshCharactersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refreshCharactersToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.refreshCharactersToolStripMenuItem.Text = "Refresh Characters";
             this.refreshCharactersToolStripMenuItem.Click += new System.EventHandler(this.RefreshCharactersToolStripMenuItemClick);
             // 
             // closeExitToolStripMenuItem
             // 
             this.closeExitToolStripMenuItem.Name = "closeExitToolStripMenuItem";
-            this.closeExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.closeExitToolStripMenuItem.Text = "Close/Exit";
             this.closeExitToolStripMenuItem.Click += new System.EventHandler(this.CloseExitToolStripMenuItemClick);
             // 
@@ -156,13 +156,13 @@
             this.navigationToolStripMenuItem,
             this.onEventToolStripMenuItem});
             this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.scriptsToolStripMenuItem.Text = "Scripts";
             // 
             // farmToolStripMenuItem
             // 
             this.farmToolStripMenuItem.Name = "farmToolStripMenuItem";
-            this.farmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.farmToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.farmToolStripMenuItem.Text = "Farm";
             this.farmToolStripMenuItem.Click += new System.EventHandler(this.FarmToolStripMenuItemClick);
             // 
@@ -170,7 +170,7 @@
             // 
             this.healingSupportToolStripMenuItem.Enabled = false;
             this.healingSupportToolStripMenuItem.Name = "healingSupportToolStripMenuItem";
-            this.healingSupportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.healingSupportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.healingSupportToolStripMenuItem.Text = "Healing Support";
             this.healingSupportToolStripMenuItem.Click += new System.EventHandler(this.HealingSupportToolStripMenuItemClick);
             // 
@@ -178,7 +178,7 @@
             // 
             this.skillupToolStripMenuItem.Enabled = false;
             this.skillupToolStripMenuItem.Name = "skillupToolStripMenuItem";
-            this.skillupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.skillupToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.skillupToolStripMenuItem.Text = "Skillup";
             this.skillupToolStripMenuItem.Visible = false;
             // 
@@ -186,7 +186,7 @@
             // 
             this.synergyToolStripMenuItem.Enabled = false;
             this.synergyToolStripMenuItem.Name = "synergyToolStripMenuItem";
-            this.synergyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.synergyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.synergyToolStripMenuItem.Text = "Synergy";
             this.synergyToolStripMenuItem.Visible = false;
             // 
@@ -194,7 +194,7 @@
             // 
             this.buySellTradeToolStripMenuItem.Enabled = false;
             this.buySellTradeToolStripMenuItem.Name = "buySellTradeToolStripMenuItem";
-            this.buySellTradeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.buySellTradeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.buySellTradeToolStripMenuItem.Text = "Buy/Sell/Trade";
             this.buySellTradeToolStripMenuItem.Visible = false;
             // 
@@ -202,13 +202,13 @@
             // 
             this.navigationToolStripMenuItem.Enabled = false;
             this.navigationToolStripMenuItem.Name = "navigationToolStripMenuItem";
-            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.navigationToolStripMenuItem.Text = "Navigation";
             // 
             // onEventToolStripMenuItem
             // 
             this.onEventToolStripMenuItem.Name = "onEventToolStripMenuItem";
-            this.onEventToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.onEventToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.onEventToolStripMenuItem.Text = "On Event Tool";
             this.onEventToolStripMenuItem.Click += new System.EventHandler(this.OnEventToolStripMenuItemClick);
             // 
@@ -221,7 +221,7 @@
             this.zaldonToolStripMenuItem});
             this.questsToolStripMenuItem.Enabled = false;
             this.questsToolStripMenuItem.Name = "questsToolStripMenuItem";
-            this.questsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.questsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.questsToolStripMenuItem.Text = "Quests";
             this.questsToolStripMenuItem.Visible = false;
             // 
@@ -257,7 +257,7 @@
             this.enableMaintenanceModeToolStripMenuItem});
             this.optionsToolStripMenuItem.Enabled = false;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // stayOnTopToolStripMenuItem
@@ -291,30 +291,29 @@
             // 
             this.fAQToolStripMenuItem.Enabled = false;
             this.fAQToolStripMenuItem.Name = "fAQToolStripMenuItem";
-            this.fAQToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fAQToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.fAQToolStripMenuItem.Text = "FAQ";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
-            // status
+            // statusStrip
             // 
-            this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.StatusLabel});
-            this.status.Location = new System.Drawing.Point(0, 187);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(366, 22);
-            this.status.TabIndex = 3;
-            this.status.Text = "xstatus";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 187);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(366, 22);
+            this.statusStrip.TabIndex = 3;
             // 
-            // StatusLabel
+            // statusLabel
             // 
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // scriptedSubHeader
             // 
@@ -390,18 +389,18 @@
             this.Controls.Add(this.scriptedSubHeader);
             this.Controls.Add(this.scriptedHeader);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.status);
-            this.Controls.Add(this.xmenu);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindowView";
             this.Text = "Scripted  - by Solidwater";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
-            this.xmenu.ResumeLayout(false);
-            this.xmenu.PerformLayout();
-            this.status.ResumeLayout(false);
-            this.status.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -410,7 +409,7 @@
 
         #endregion
 
-        public System.Windows.Forms.MenuStrip xmenu;
+        public System.Windows.Forms.MenuStrip menuStrip;
         public System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
@@ -433,8 +432,8 @@
         public System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem fAQToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        public System.Windows.Forms.StatusStrip status;
-        public System.Windows.Forms.ToolStripStatusLabel StatusLabel;
+        public System.Windows.Forms.StatusStrip statusStrip;
+        public System.Windows.Forms.ToolStripStatusLabel statusLabel;
         public System.Windows.Forms.PictureBox pictureBox;
         public System.Windows.Forms.Label scriptedSubHeader;
         public System.Windows.Forms.Label scriptedHeader;

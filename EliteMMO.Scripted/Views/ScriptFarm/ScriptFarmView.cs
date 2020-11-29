@@ -6,7 +6,7 @@
     using System.Linq;
     using API;
     using Embedded;
-    public partial class ScriptFarmView : UserControl
+    public partial class ScriptFarmView : UserControl, IScriptFarmView
     {
         public ScriptFarmView()
         {

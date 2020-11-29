@@ -6,19 +6,8 @@ namespace EliteMMO.Scripted.Models.MainWindow
 {
     public class MainWindowModel : AbstractScriptedModel, IMainWindowModel
     {
-        public enum Function
-        {
-            LOAD_ABOUT_VIEW,
-            LOAD_FARM_VIEW,
-            LOAD_HEALING_SUPPORT_VIEW,
-            LOAD_ON_EVENT_TOOL_VIEW,
-            REFRESH_CHARACTERS,
-            RE_INITILIAZE_API
-        }
-
         private Process selectedProcess;
         private List<Process> currentProcesses;
-        private MainWindowModel.Function mainView;
         public MainWindowModel()
         {
             this.CurrentProcesses = GetPOLProcesses().ToList<Process>();
@@ -31,11 +20,6 @@ namespace EliteMMO.Scripted.Models.MainWindow
         {
             get => this.selectedProcess;
             set => this.selectedProcess = value;
-        }
-        public MainWindowModel.Function MainView
-        {
-            get => this.mainView;
-            set => this.mainView = value;
         }
         public List<Process> CurrentProcesses
         {

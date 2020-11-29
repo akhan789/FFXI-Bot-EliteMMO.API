@@ -5,18 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EliteMMO.Scripted.Controller
+namespace EliteMMO.Scripted.Presenters
 {
-    public abstract class AbstractScriptedController : IScriptedController
+    public abstract class AbstractScriptedPresenter : IScriptedPresenter
     {
         protected IScriptedModel model;
         protected IScriptedView view;
 
-        public AbstractScriptedController()
-        {
-        }
-
-        public AbstractScriptedController(IScriptedModel model, IScriptedView view)
+        public AbstractScriptedPresenter(IScriptedModel model, IScriptedView view)
         {
             this.model = model;
         }

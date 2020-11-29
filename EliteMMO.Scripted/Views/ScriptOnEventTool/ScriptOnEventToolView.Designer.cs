@@ -64,9 +64,8 @@
             this.editSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeCheckedOEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createEvent = new System.Windows.Forms.MenuStrip();
-            this.addNewEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createSaveEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chatEvent = new System.Windows.Forms.TextBox();
-            this.bgw_script_events = new System.ComponentModel.BackgroundWorker();
             this.mainGroupBox.SuspendLayout();
             this.startStopStrip.SuspendLayout();
             this.getSetEvents.SuspendLayout();
@@ -182,7 +181,7 @@
             this.executeCommand.Size = new System.Drawing.Size(160, 20);
             this.executeCommand.TabIndex = 28;
             // 
-            // eventsList
+            // eventsListItems
             // 
             this.eventsList.CheckBoxes = true;
             this.eventsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -195,7 +194,7 @@
             this.eventsList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.eventsList.HideSelection = false;
             this.eventsList.Location = new System.Drawing.Point(12, 48);
-            this.eventsList.Name = "eventsList";
+            this.eventsList.Name = "eventsListItems";
             this.eventsList.Size = new System.Drawing.Size(432, 198);
             this.eventsList.TabIndex = 27;
             this.eventsList.UseCompatibleStateImageBehavior = false;
@@ -272,20 +271,20 @@
             // 
             this.createEvent.Dock = System.Windows.Forms.DockStyle.None;
             this.createEvent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewEventToolStripMenuItem});
+            this.createSaveEventToolStripMenuItem});
             this.createEvent.Location = new System.Drawing.Point(284, 340);
             this.createEvent.Name = "createEvent";
-            this.createEvent.Size = new System.Drawing.Size(122, 24);
+            this.createEvent.Size = new System.Drawing.Size(242, 24);
             this.createEvent.TabIndex = 32;
             this.createEvent.Text = "menuStrip2";
             // 
-            // addNewEventToolStripMenuItem
+            // createSaveEventToolStripMenuItem
             // 
-            this.addNewEventToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
-            this.addNewEventToolStripMenuItem.Name = "addNewEventToolStripMenuItem";
-            this.addNewEventToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
-            this.addNewEventToolStripMenuItem.Text = "Create/Save Event";
-            this.addNewEventToolStripMenuItem.Click += new System.EventHandler(this.AddNewEventToolStripMenuItem_Click);
+            this.createSaveEventToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.createSaveEventToolStripMenuItem.Name = "createSaveEventToolStripMenuItem";
+            this.createSaveEventToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
+            this.createSaveEventToolStripMenuItem.Text = "Create/Save Event";
+            this.createSaveEventToolStripMenuItem.Click += new System.EventHandler(this.CreateSaveEventToolStripMenuItem_Click);
             // 
             // chatEvent
             // 
@@ -293,12 +292,6 @@
             this.chatEvent.Name = "chatEvent";
             this.chatEvent.Size = new System.Drawing.Size(160, 20);
             this.chatEvent.TabIndex = 16;
-            // 
-            // bgw_script_events
-            // 
-            this.bgw_script_events.WorkerReportsProgress = true;
-            this.bgw_script_events.WorkerSupportsCancellation = true;
-            this.bgw_script_events.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwScriptEventsDoWork);
             // 
             // ScriptOnEventToolView
             // 
@@ -337,8 +330,7 @@
         public System.Windows.Forms.ToolStripMenuItem startScriptToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem stopScriptToolStripMenuItem;
         public System.Windows.Forms.MenuStrip createEvent;
-        public System.Windows.Forms.ToolStripMenuItem addNewEventToolStripMenuItem;
-        public System.ComponentModel.BackgroundWorker bgw_script_events;
+        public System.Windows.Forms.ToolStripMenuItem createSaveEventToolStripMenuItem;
         public System.Windows.Forms.Label chatTypeLabel;
         public System.Windows.Forms.ComboBox chatTypeCombo;
         public System.Windows.Forms.CheckBox useRegEx;

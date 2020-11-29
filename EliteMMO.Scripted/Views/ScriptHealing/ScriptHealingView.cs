@@ -2,7 +2,7 @@
 {
     using System.Windows.Forms;
     using API;
-    public partial class ScriptHealingView : UserControl
+    public partial class ScriptHealingView : UserControl, IScriptHealingView
     {
         public ScriptHealingView()
         {

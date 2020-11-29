@@ -6,7 +6,6 @@ namespace EliteMMO.Scripted.Models.MainWindow
     public interface IMainWindowModel : IScriptedModel
     {
         Process SelectedProcess { get; set; }
-        MainWindowModel.Function MainView { get; set; }
         List<Process> CurrentProcesses { get; set; }
         void AddToCurrentProcesses(Process process);
         void ReInitializeApi();
