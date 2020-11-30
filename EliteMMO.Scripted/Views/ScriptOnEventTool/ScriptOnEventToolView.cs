@@ -8,257 +8,105 @@
     using EliteMMO.Scripted.Presenters.ScriptOnEventTool;
     using EliteMMO.Scripted.Models.ScriptOnEventTool;
     using EliteMMO.Scripted.Models;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public partial class ScriptOnEventToolView : UserControl, IScriptOnEventToolView
     {
-        private IScriptOnEventToolPresenter scriptOnEventToolController = new ScriptOnEventToolController();
-        private IScriptOnEventToolModel scriptOnEventToolModel = new ScriptOnEventToolModel();
+        private IScriptOnEventToolPresenter scriptOnEventToolPresenter;
+        private IScriptOnEventToolModel scriptOnEventToolModel;
         private string fileXML;
         private string extension;
         public ScriptOnEventToolView()
         {
             InitializeComponent();
-            WireUp(scriptOnEventToolController, scriptOnEventToolModel);
-            Update();
-        }
-        public void WireUp(IScriptOnEventToolPresenter controller, IScriptOnEventToolModel model)
-        {
-            if (scriptOnEventToolModel != null)
-            {
-                scriptOnEventToolModel.RemoveObserver(this);
-            }
-            scriptOnEventToolModel = model;
-            scriptOnEventToolController = controller;
-            scriptOnEventToolController.SetModel(scriptOnEventToolModel);
-            scriptOnEventToolController.SetView(this);
+            scriptOnEventToolModel = new ScriptOnEventToolModel();
             scriptOnEventToolModel.AddObserver(this);
-        }
-        public void Update(IScriptedModel model)
-        {
-            if (model is IScriptOnEventToolModel)
-            {
-                scriptOnEventToolModel = (IScriptOnEventToolModel)model;
-                switch (scriptOnEventToolModel.ScriptOnEventToolFunction)
-                {
-                    case ScriptOnEventToolModel.Function.CREATE_OR_SAVE_EVENT:
-                    case ScriptOnEventToolModel.Function.START_BOT:
-                    case ScriptOnEventToolModel.Function.STOP_BOT:
-                    default:
-                        break;
-                }
-            }
+            scriptOnEventToolPresenter = new ScriptOnEventToolPresenter(scriptOnEventToolModel, this);
         }
         private void StartScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            scriptOnEventToolController.RequestStartScript();
+            scriptOnEventToolPresenter.StartScript();
         }
         private void StopScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            scriptOnEventToolController.RequestStopScript();
+            scriptOnEventToolPresenter.StopScript();
         }
         private void CreateSaveEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            scriptOnEventToolController.CreateSaveEvent();
+            scriptOnEventToolPresenter.CreateOrSaveEvent();
         }
-
         private void EventsList_DoubleClick(object sender, EventArgs e)
         {
-            if (eventsList.SelectedItems.Count <= 0)
-                return;
-
-            foreach (ListViewItem selected in eventsList.SelectedItems)
-            {
-                eventsList.Items.Remove(selected);
-            }
-
-            if (eventsList.Items.Count == 0)
-            {
-                saveOEToolStripMenuItem.Enabled = false;
-                removeCheckedOEToolStripMenuItem.Enabled = false;
-                editSelectedToolStripMenuItem.Enabled = false;
-            }
+            scriptOnEventToolPresenter.RemoveSelectedItems();
         }
-
         private void LoadOEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-
-            if (Directory.Exists(eventPath) == false)
-                Directory.CreateDirectory(eventPath);
-
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Title = "Select OnEvents File To Load";
-            openFile.InitialDirectory = eventPath;
-            openFile.Filter = "OnEvent File (*.xml)|*.xml|OnEvent File (*.oef)|*.oef";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
-
-            DialogResult dlgResult = openFile.ShowDialog();
-            if (dlgResult != DialogResult.OK)
-                return;
-
-            fileXML = openFile.FileName;
-
-            try
-            {
-                eventsList.Items.Clear();
-                var ext = Path.GetExtension(openFile.FileName);
-                extension = ext;
-
-                if (ext == ".oef")
-                {
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(openFile.FileName);
-
-                    XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
-                    XmlNodeList nodeList = mainNode.ChildNodes;
-
-                    for (int x = 0; x < nodeList.Count; x++)
-                    {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["eventtext"].Value.ToString(),
-                            nodeList[x].Attributes["eventcmd"].Value.ToString(),
-                        }));
-                        string temp = nodeList[x].Attributes["eventchecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
-
-                        eventsList.Items[x].SubItems.Add("ALL");
-                        eventsList.Items[x].SubItems.Add("False");
-                    }
-                }
-                else if (ext == ".xml")
-                {
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(openFile.FileName);
-
-                    XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
-                    XmlNodeList nodeList = mainNode.ChildNodes;
-
-                    for (var x = 0; x < nodeList.Count; x++)
-                    {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["ChatEvent"].Value.ToString(),
-                            nodeList[x].Attributes["EventCommand"].Value.ToString(),
-                            nodeList[x].Attributes["ChatType"].Value.ToString(),
-                            nodeList[x].Attributes["isRegEx"].Value.ToString()
-                        }));
-
-                        var temp = nodeList[x].Attributes["isChecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
-                    }
-                }
-
-                if (saveOEToolStripMenuItem.Enabled == false)
-                    saveOEToolStripMenuItem.Enabled = true;
-
-                if (removeCheckedOEToolStripMenuItem.Enabled == false)
-                    removeCheckedOEToolStripMenuItem.Enabled = true;
-
-                if (editSelectedToolStripMenuItem.Enabled == false)
-                    editSelectedToolStripMenuItem.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load the OnEvents file. Please try again.\n" + ex.Message);
-                throw;
-            }
+            scriptOnEventToolPresenter.LoadOnEventsFile();
         }
 
         private void SaveOEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-
-            if (Directory.Exists(eventPath) == false)
-                Directory.CreateDirectory(eventPath);
-
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Title = "Save OnEvents File";
-            saveFile.InitialDirectory = eventPath;
-            saveFile.Filter = "OnEvent File (*.xml)|*.xml";
-            saveFile.FilterIndex = 0;
-            saveFile.RestoreDirectory = true;
-
-            DialogResult dlgResult = saveFile.ShowDialog();
-            if (dlgResult != DialogResult.OK) return;
-
-            try
-            {
-                XmlTextWriter xmlWriter = new XmlTextWriter(saveFile.FileName, Encoding.UTF8);
-                xmlWriter.Formatting = Formatting.Indented;
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("OnEventsList");
-
-                for (int i = 0; i < eventsList.Items.Count; i++)
-                {
-                    xmlWriter.WriteStartElement("Event");
-                    xmlWriter.WriteAttributeString("isChecked", eventsList.Items[i].Checked.ToString());
-                    xmlWriter.WriteAttributeString("ChatEvent", eventsList.Items[i].SubItems[0].Text.ToString());
-                    xmlWriter.WriteAttributeString("EventCommand", eventsList.Items[i].SubItems[1].Text.ToString());
-                    xmlWriter.WriteAttributeString("ChatType", eventsList.Items[i].SubItems[2].Text.ToString());
-                    xmlWriter.WriteAttributeString("isRegEx", eventsList.Items[i].SubItems[3].Text.ToString());
-
-                    xmlWriter.WriteEndElement();
-                }
-
-                xmlWriter.WriteEndElement();
-                xmlWriter.WriteEndDocument();
-                xmlWriter.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to save OnEvents file. Please try another location.\n" + ex.Message);
-                throw;
-            }
+            scriptOnEventToolPresenter.SaveOnEventsFile();
         }
 
         private void RemoveCheckedOEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem items in eventsList.CheckedItems)
-            {
-                eventsList.Items.Remove(items);
-            }
-
-            if (eventsList.Items.Count == 0)
-            {
-                if (saveOEToolStripMenuItem.Enabled == true)
-                    saveOEToolStripMenuItem.Enabled = false;
-
-                if (removeCheckedOEToolStripMenuItem.Enabled == true)
-                    removeCheckedOEToolStripMenuItem.Enabled = false;
-
-                if (editSelectedToolStripMenuItem.Enabled == true)
-                    editSelectedToolStripMenuItem.Enabled = false;
-            }
+            scriptOnEventToolPresenter.RemoveCheckedItems();
         }
 
         private void EditSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var i = eventsList.Items.IndexOf(eventsList.SelectedItems[0]);
-
-            chatEvent.Text = eventsList.SelectedItems[0].SubItems[0].Text;
-            executeCommand.Text = eventsList.SelectedItems[0].SubItems[1].Text;
-            chatTypeCombo.Text = eventsList.SelectedItems[0].SubItems[2].Text;
-
-            if (eventsList.SelectedItems[0].SubItems[3].Text.ToString() == "False")
+            scriptOnEventToolPresenter.EditSelectedItem();
+        }
+        public IList SelectedItems
+        {
+            get => eventsList.SelectedItems;
+        }
+        public IList CheckedItems
+        {
+            get => eventsList.CheckedItems;
+        }
+        public void removeEventsListItem(object item)
+        {
+            if (item is ListViewItem)
             {
-                useRegEx.Checked = false;
-            }
-            else
-            {
-                useRegEx.Checked = true;
+                eventsList.Items.Remove((ListViewItem)item);
             }
         }
-
-        public void EnableStartScriptToolStripMenuItem(bool enable)
+        public void GetEventItemsSubItemsSetText(object eventsListItem, int subItemIndex, string text)
         {
-            startScriptToolStripMenuItem.Enabled = enable;
+            if (eventsListItem is ListViewItem)
+            {
+                ((ListViewItem)eventsListItem).SubItems[subItemIndex].Text = text;
+            }
+        }
+        public string GetEventItemsSubItemsGetText(int itemIndex, int subItemIndex)
+        {
+            return eventsList.Items[itemIndex].SubItems[subItemIndex].Text;
+        }
+        public string GetSelectedEventItemsSubItemsGetText(int selectedItemIndex, int subItemIndex)
+        {
+            return eventsList.SelectedItems[selectedItemIndex].SubItems[subItemIndex].Text;
+        }
+        public bool IsEventsListItemChecked(int itemIndex)
+        {
+            return eventsList.Items[itemIndex].Checked;
+        }
+        public IList CurrentEventsListItems
+        {
+            get => eventsList.Items;
         }
 
-        public void EnableStopScriptToolStripMenuItem(bool enable)
+        public bool EnableStartScriptToolStripMenuItem
         {
-            stopScriptToolStripMenuItem.Enabled = enable;
+            get => startScriptToolStripMenuItem.Enabled;
+            set => startScriptToolStripMenuItem.Enabled = value;
+        }
+        public bool EnableStopScriptToolStripMenuItem
+        {
+            get => stopScriptToolStripMenuItem.Enabled;
+            set => stopScriptToolStripMenuItem.Enabled = value;
         }
         public bool EnableSaveOEToolStripMenuItem
         {
@@ -275,7 +123,8 @@
             get => editSelectedToolStripMenuItem.Enabled;
             set => editSelectedToolStripMenuItem.Enabled = value;
         }
-        public string ChatEventText {
+        public string ChatEventText
+        {
             get => chatEvent.Text;
             set => chatEvent.Text = value;
         }
@@ -293,11 +142,6 @@
         {
             get => useRegEx.Checked;
             set => useRegEx.Checked = value;
-        }
-        public ListView EventsList
-        {
-            get => eventsList;
-            set => eventsList = value;
         }
     }
 }

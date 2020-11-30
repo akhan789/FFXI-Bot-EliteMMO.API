@@ -72,18 +72,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\AbstractScriptedController.cs" />
-    <Compile Include="Controller\MainWindow\IMainWindowController.cs" />
-    <Compile Include="Controller\MainWindow\MainWindowController.cs" />
-    <Compile Include="Controller\IScriptedController.cs" />
-    <Compile Include="Controller\ScriptFarm\IScriptFarmController.cs" />
-    <Compile Include="Controller\ScriptFarm\ScriptFarmController.cs" />
-    <Compile Include="Controller\ScriptHealing\IScriptHealingController.cs" />
-    <Compile Include="Controller\ScriptHealing\ScriptHealingController.cs" />
-    <Compile Include="Controller\ScriptNaviMap\IScriptNaviMapController.cs" />
-    <Compile Include="Controller\ScriptNaviMap\ScriptNaviMapController.cs" />
-    <Compile Include="Controller\ScriptOnEventTool\IScriptOnEventToolController.cs" />
-    <Compile Include="Controller\ScriptOnEventTool\ScriptOnEventToolController.cs" />
+    <Compile Include="Presenters\AbstractScriptedPresenter.cs" />
+    <Compile Include="Presenters\MainWindow\IMainWindowPresenter.cs" />
+    <Compile Include="Presenters\MainWindow\MainWindowPresenter.cs" />
+    <Compile Include="Presenters\IScriptedPresenter.cs" />
+    <Compile Include="Presenters\ScriptFarm\IScriptFarmPresenter.cs" />
+    <Compile Include="Presenters\ScriptFarm\ScriptFarmPresenter.cs" />
+    <Compile Include="Presenters\ScriptHealing\IScriptHealingPresenter.cs" />
+    <Compile Include="Presenters\ScriptHealing\ScriptHealingPresenter.cs" />
+    <Compile Include="Presenters\ScriptNaviMap\IScriptNaviMapPresenter.cs" />
+    <Compile Include="Presenters\ScriptNaviMap\ScriptNaviMapPresenter.cs" />
+    <Compile Include="Presenters\ScriptOnEventTool\IScriptOnEventToolPresenter.cs" />
+    <Compile Include="Presenters\ScriptOnEventTool\ScriptOnEventToolPresenter.cs" />
     <Compile Include="Embedded\InventoryItems.cs" />
     <Compile Include="Embedded\SigScan.cs" />
     <Compile Include="Models\AbstractScriptedModel.cs" />

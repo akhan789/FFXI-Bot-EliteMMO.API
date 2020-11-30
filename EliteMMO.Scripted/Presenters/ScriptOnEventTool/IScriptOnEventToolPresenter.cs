@@ -8,8 +8,13 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
 {
     public interface IScriptOnEventToolPresenter : IScriptedPresenter
     {
-        void RequestStartScript();
-        void RequestStopScript();
-        void CreateSaveEvent();
+        void StartScript();
+        void StopScript();
+        void CreateOrSaveEvent();
+        void LoadOnEventsFile();
+        void SaveOnEventsFile();
+        void EditSelectedItem();
+        void RemoveSelectedItems();
+        void RemoveCheckedItems();
     }
 }
