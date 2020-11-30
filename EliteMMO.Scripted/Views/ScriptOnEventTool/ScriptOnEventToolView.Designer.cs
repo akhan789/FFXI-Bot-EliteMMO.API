@@ -101,6 +101,7 @@
             this.useRegEx.TabIndex = 35;
             this.useRegEx.Text = "Use Regular Expressions";
             this.useRegEx.UseVisualStyleBackColor = true;
+            this.useRegEx.CheckedChanged += new System.EventHandler(this.UseRegEx_CheckedChanged);
             // 
             // chatTypeLabel
             // 
@@ -181,7 +182,7 @@
             this.executeCommand.Size = new System.Drawing.Size(160, 20);
             this.executeCommand.TabIndex = 28;
             // 
-            // eventsListItems
+            // eventsList
             // 
             this.eventsList.CheckBoxes = true;
             this.eventsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -194,7 +195,7 @@
             this.eventsList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.eventsList.HideSelection = false;
             this.eventsList.Location = new System.Drawing.Point(12, 48);
-            this.eventsList.Name = "eventsListItems";
+            this.eventsList.Name = "eventsList";
             this.eventsList.Size = new System.Drawing.Size(432, 198);
             this.eventsList.TabIndex = 27;
             this.eventsList.UseCompatibleStateImageBehavior = false;
@@ -274,7 +275,7 @@
             this.createSaveEventToolStripMenuItem});
             this.createEvent.Location = new System.Drawing.Point(284, 340);
             this.createEvent.Name = "createEvent";
-            this.createEvent.Size = new System.Drawing.Size(242, 24);
+            this.createEvent.Size = new System.Drawing.Size(122, 24);
             this.createEvent.TabIndex = 32;
             this.createEvent.Text = "menuStrip2";
             // 

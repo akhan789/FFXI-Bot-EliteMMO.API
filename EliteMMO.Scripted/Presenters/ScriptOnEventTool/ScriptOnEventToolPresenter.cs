@@ -3,11 +3,7 @@ using EliteMMO.Scripted.Views.ScriptOnEventTool;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using static System.Windows.Forms.ListView;
+using static EliteMMO.Scripted.Models.ScriptOnEventTool.ScriptOnEventToolModel;
 
 namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
 {
@@ -88,20 +84,37 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
         {
             try
             {
-                scriptOnEventToolModel.LoadOnEventsFile();
-                if (scriptOnEventToolView.EnableSaveOEToolStripMenuItem == false)
+                string openFilename;
+                if ((openFilename = scriptOnEventToolView.ShowFileDialog(false, "Select OnEvents File To Load", "OnEvent File (*.xml)|*.xml|OnEvent File (*.oef)|*.oef", 1, true)) != null)
                 {
-                    scriptOnEventToolView.EnableSaveOEToolStripMenuItem = true;
-                }
-
-                if (scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem == false)
-                {
-                    scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem = true;
-                }
-
-                if (scriptOnEventToolView.EnableEditSelectedToolStripMenuItem == false)
-                {
-                    scriptOnEventToolView.EnableEditSelectedToolStripMenuItem = true;
+                    scriptOnEventToolView.CurrentEventsListItems.Clear();
+                    scriptOnEventToolModel.FileXML = openFilename;
+                    IList<EventElement> eventsList = scriptOnEventToolModel.LoadOnEventsFile();
+                    for (int x = 0; x < eventsList.Count; x++)
+                    {
+                        scriptOnEventToolView.CurrentEventsListItemAddItem(eventsList[x].Item);
+                        scriptOnEventToolView.CurrentEventsListItemAddItem(eventsList[x + 1].Item);
+                        scriptOnEventToolView.SetEventsListItemChecked(x, eventsList[x].Checked);
+                        if (eventsList[x].SubItems?.Count > 0)
+                        {
+                            for (int y = 0; y < eventsList[x].SubItems.Count; y++)
+                            {
+                                scriptOnEventToolView.CurrentEventsListItemAddSubItem(x, eventsList[x].SubItems[y]);
+                            }
+                        }
+                    }
+                    if (scriptOnEventToolView.EnableSaveOEToolStripMenuItem == false)
+                    {
+                        scriptOnEventToolView.EnableSaveOEToolStripMenuItem = true;
+                    }
+                    if (scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem == false)
+                    {
+                        scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem = true;
+                    }
+                    if (scriptOnEventToolView.EnableEditSelectedToolStripMenuItem == false)
+                    {
+                        scriptOnEventToolView.EnableEditSelectedToolStripMenuItem = true;
+                    }
                 }
             }
             catch (Exception e)
@@ -110,31 +123,40 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
                 throw;
             }
         }
-
         public void SaveOnEventsFile()
         {
-            IList<string> chatEventTexts = new List<string>();
-            IList<string> eventCommandTexts = new List<string>();
-            IList<string> chatTypeXTexts = new List<string>();
-            IList<string> isRegExTexts = new List<string>();
-            IList<bool> checkedItem = new List<bool>();
-            for (int x = 0; x < scriptOnEventToolView.CurrentEventsListItems.Count; x++)
+            try
             {
-                chatEventTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 0).ToString());
-                eventCommandTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 1).ToString());
-                chatTypeXTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 2).ToString());
-                isRegExTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 3).ToString());
-                checkedItem.Add(scriptOnEventToolView.IsEventsListItemChecked(x));
+                string saveFilename;
+                if ((saveFilename = scriptOnEventToolView.ShowFileDialog(true, "Save OnEvents File", "OnEvent File (*.xml)|*.xml", 0, true)) != null)
+                {
+                    IList<string> chatEventTexts = new List<string>();
+                    IList<string> eventCommandTexts = new List<string>();
+                    IList<string> chatTypeXTexts = new List<string>();
+                    IList<string> isRegExTexts = new List<string>();
+                    IList<bool> checkedItem = new List<bool>();
+                    for (int x = 0; x < scriptOnEventToolView.CurrentEventsListItems.Count; x++)
+                    {
+                        chatEventTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 0).ToString());
+                        eventCommandTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 1).ToString());
+                        chatTypeXTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 2).ToString());
+                        isRegExTexts.Add(scriptOnEventToolView.GetEventItemsSubItemsGetText(x, 3).ToString());
+                        checkedItem.Add(scriptOnEventToolView.IsEventsListItemChecked(x));
+                    }
+                    scriptOnEventToolModel.SaveOnEventsFile(saveFilename, scriptOnEventToolView.CurrentEventsListItems, chatEventTexts, eventCommandTexts, chatTypeXTexts, isRegExTexts, checkedItem);
+                }
             }
-            scriptOnEventToolModel.SaveOnEventsFile(scriptOnEventToolView.CurrentEventsListItems, chatEventTexts, eventCommandTexts, chatTypeXTexts, isRegExTexts, checkedItem);
+            catch (Exception e)
+            {
+                scriptOnEventToolView.ShowMessageBox("Failed to save OnEvents file. Please try another location.\n" + e.Message);
+                throw;
+            }
         }
-
         public void EditSelectedItem()
         {
             scriptOnEventToolView.ChatEventText = scriptOnEventToolView.GetSelectedEventItemsSubItemsGetText(0, 0);
             scriptOnEventToolView.ExecuteCommandText = scriptOnEventToolView.GetSelectedEventItemsSubItemsGetText(0, 1);
             scriptOnEventToolView.ChatTypeComboText = scriptOnEventToolView.GetSelectedEventItemsSubItemsGetText(0, 2);
-
             if (scriptOnEventToolView.GetSelectedEventItemsSubItemsGetText(0, 3).ToString() == "False")
             {
                 scriptOnEventToolView.UseRegexChecked = false;
@@ -144,19 +166,16 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
                 scriptOnEventToolView.UseRegexChecked = true;
             }
         }
-
         public void RemoveSelectedItems()
         {
             if (scriptOnEventToolView.SelectedItems.Count <= 0)
             {
                 return;
             }
-
             foreach (object selected in scriptOnEventToolView.SelectedItems)
             {
-                scriptOnEventToolView.removeEventsListItem(selected);
+                scriptOnEventToolView.RemoveEventsListItem(selected);
             }
-
             if (scriptOnEventToolView.CurrentEventsListItems.Count == 0)
             {
                 scriptOnEventToolView.EnableSaveOEToolStripMenuItem = false;
@@ -168,26 +187,27 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
         {
             foreach (object item in scriptOnEventToolView.CheckedItems)
             {
-                scriptOnEventToolView.removeEventsListItem(item);
+                scriptOnEventToolView.RemoveEventsListItem(item);
             }
-
             if (scriptOnEventToolView.CurrentEventsListItems.Count == 0)
             {
                 if (scriptOnEventToolView.EnableSaveOEToolStripMenuItem == true)
                 {
                     scriptOnEventToolView.EnableSaveOEToolStripMenuItem = false;
                 }
-
                 if (scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem == true)
                 {
                     scriptOnEventToolView.EnableRemoveCheckedOEToolStripMenuItem = false;
                 }
-
                 if (scriptOnEventToolView.EnableEditSelectedToolStripMenuItem == true)
                 {
                     scriptOnEventToolView.EnableEditSelectedToolStripMenuItem = false;
                 }
             }
+        }
+        public void SetUseRegEx()
+        {
+            scriptOnEventToolModel.UseRegEx = scriptOnEventToolView.UseRegexChecked;
         }
     }
 }

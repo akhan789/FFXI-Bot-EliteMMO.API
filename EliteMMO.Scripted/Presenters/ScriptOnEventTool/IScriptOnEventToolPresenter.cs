@@ -16,5 +16,6 @@ namespace EliteMMO.Scripted.Presenters.ScriptOnEventTool
         void EditSelectedItem();
         void RemoveSelectedItems();
         void RemoveCheckedItems();
+        void SetUseRegEx();
     }
 }

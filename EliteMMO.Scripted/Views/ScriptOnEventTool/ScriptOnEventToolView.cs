@@ -2,21 +2,15 @@
 {
     using System;
     using System.Windows.Forms;
-    using System.Text;
-    using System.Xml;
-    using System.IO;
     using EliteMMO.Scripted.Presenters.ScriptOnEventTool;
     using EliteMMO.Scripted.Models.ScriptOnEventTool;
-    using EliteMMO.Scripted.Models;
     using System.Collections;
-    using System.Collections.Generic;
+    using System.IO;
 
     public partial class ScriptOnEventToolView : UserControl, IScriptOnEventToolView
     {
         private IScriptOnEventToolPresenter scriptOnEventToolPresenter;
         private IScriptOnEventToolModel scriptOnEventToolModel;
-        private string fileXML;
-        private string extension;
         public ScriptOnEventToolView()
         {
             InitializeComponent();
@@ -44,30 +38,55 @@
         {
             scriptOnEventToolPresenter.LoadOnEventsFile();
         }
-
         private void SaveOEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             scriptOnEventToolPresenter.SaveOnEventsFile();
         }
-
         private void RemoveCheckedOEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             scriptOnEventToolPresenter.RemoveCheckedItems();
         }
-
         private void EditSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             scriptOnEventToolPresenter.EditSelectedItem();
         }
-        public IList SelectedItems
+        private void UseRegEx_CheckedChanged(object sender, EventArgs e)
         {
-            get => eventsList.SelectedItems;
+            scriptOnEventToolPresenter.SetUseRegEx();
         }
-        public IList CheckedItems
+        public string ShowFileDialog(bool save, string title, string filter, int filterIndex, bool restoreDirectory)
         {
-            get => eventsList.CheckedItems;
+            string eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
+            if (Directory.Exists(eventPath) == false)
+            {
+                Directory.CreateDirectory(eventPath);
+            }
+            FileDialog fileDialog;
+            if (save)
+            {
+                fileDialog = new SaveFileDialog();
+            }
+            else
+            {
+                fileDialog = new OpenFileDialog();
+            }
+            fileDialog.Title = title;
+            fileDialog.InitialDirectory = eventPath;
+            fileDialog.Filter = filter;
+            fileDialog.FilterIndex = filterIndex;
+            fileDialog.RestoreDirectory = restoreDirectory;
+            DialogResult dlgResult = fileDialog.ShowDialog();
+            if (dlgResult == DialogResult.OK)
+            {
+                return fileDialog.FileName;
+            }
+            return null;
         }
-        public void removeEventsListItem(object item)
+        public void ShowMessageBox(string message)
+        {
+            MessageBox.Show(message);
+        }
+        public void RemoveEventsListItem(object item)
         {
             if (item is ListViewItem)
             {
@@ -89,15 +108,54 @@
         {
             return eventsList.SelectedItems[selectedItemIndex].SubItems[subItemIndex].Text;
         }
+        public void SetEventsListItemChecked(int itemIndex, bool value)
+        {
+            eventsList.Items[itemIndex].Checked = value;
+        }
         public bool IsEventsListItemChecked(int itemIndex)
         {
             return eventsList.Items[itemIndex].Checked;
+        }
+        public void CurrentEventsListItemAddItem(string value)
+        {
+            eventsList.Items.Add(value);
+        }
+        public void CurrentEventsListItemAddSubItem(int itemIndex, string value)
+        {
+            eventsList.Items[itemIndex].SubItems.Add(value);
+        }
+        public IList SelectedItems
+        {
+            get => eventsList.SelectedItems;
+        }
+        public IList CheckedItems
+        {
+            get => eventsList.CheckedItems;
         }
         public IList CurrentEventsListItems
         {
             get => eventsList.Items;
         }
-
+        public string ChatEventText
+        {
+            get => chatEvent.Text;
+            set => chatEvent.Text = value;
+        }
+        public string ChatTypeComboText
+        {
+            get => chatTypeCombo.Text;
+            set => chatTypeCombo.Text = value;
+        }
+        public string ExecuteCommandText
+        {
+            get => executeCommand.Text;
+            set => executeCommand.Text = value;
+        }
+        public bool UseRegexChecked
+        {
+            get => useRegEx.Checked;
+            set => useRegEx.Checked = value;
+        }
         public bool EnableStartScriptToolStripMenuItem
         {
             get => startScriptToolStripMenuItem.Enabled;
@@ -122,26 +180,6 @@
         {
             get => editSelectedToolStripMenuItem.Enabled;
             set => editSelectedToolStripMenuItem.Enabled = value;
-        }
-        public string ChatEventText
-        {
-            get => chatEvent.Text;
-            set => chatEvent.Text = value;
-        }
-        public string ChatTypeComboText
-        {
-            get => chatTypeCombo.Text;
-            set => chatTypeCombo.Text = value;
-        }
-        public string ExecuteCommandText
-        {
-            get => executeCommand.Text;
-            set => executeCommand.Text = value;
-        }
-        public bool UseRegexChecked
-        {
-            get => useRegEx.Checked;
-            set => useRegEx.Checked = value;
         }
     }
 }

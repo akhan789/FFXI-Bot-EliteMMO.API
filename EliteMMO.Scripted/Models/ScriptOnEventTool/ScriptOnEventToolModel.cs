@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 using System.Xml;
+using static EliteMMO.API.EliteAPI;
 
 namespace EliteMMO.Scripted.Models.ScriptOnEventTool
 {
@@ -16,18 +17,56 @@ namespace EliteMMO.Scripted.Models.ScriptOnEventTool
         private bool botRunning;
         private string fileXML;
         private string extension;
-
+        private string eventsFilePath;
+        private bool useRegEx;
         public ScriptOnEventToolModel()
         {
-            this.bgwScriptEvents = new System.ComponentModel.BackgroundWorker();
+            this.bgwScriptEvents = new BackgroundWorker();
             this.bgwScriptEvents.WorkerReportsProgress = true;
             this.bgwScriptEvents.WorkerSupportsCancellation = true;
-            this.bgwScriptEvents.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwScriptEventsDoWork);
+            this.bgwScriptEvents.DoWork += new DoWorkEventHandler(this.BgwScriptEventsDoWork);
+        }
+        private void BgwScriptEventsDoWork(object sender, DoWorkEventArgs e)
+        {
+            while (botRunning || !bgwScriptEvents.CancellationPending)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+
+                IList onEvent = (from object itemChecked in eventsListItems.CheckedItems
+                                 select itemChecked.ToString()).ToList();
+
+                if (eventsListItems.Items.Count == 0 || onEvent.Count == 0)
+                {
+                    continue;
+                }
+
+                ChatEntry line = api.Chat.GetNextChatLine();
+                if (string.IsNullOrEmpty(line?.Text))
+                {
+                    continue;
+                }
+
+                if (UseRegEx)
+                {
+                    foreach (ListViewItem item in from item in eventsListItems.Items.Cast<ListViewItem>().Where(item => line.Text.ToLower().Contains(item.Text.ToLower()))
+                                                  let scan = new Regex(eventsListItems.Text, RegexOptions.IgnoreCase)
+                                                  where scan.IsMatch(line.Text) select item)
+                    {
+                        api.ThirdParty.SendString(item.SubItems[1].Text);
+                    }
+                }
+                else
+                {
+                    foreach (ListViewItem item in eventsListItems.Items.Cast<ListViewItem>().Where(item => line.Text.ToLower().Contains(item.Text.ToLower())))
+                    {
+                        api.ThirdParty.SendString(item.SubItems[1].Text);
+                    }
+                }
+            }
         }
         public void StartBot()
         {
-            this.botRunning = true;
-
+            BotRunning = true;
             if (!bgwScriptEvents.IsBusy)
             {
                 bgwScriptEvents.RunWorkerAsync();
@@ -35,132 +74,60 @@ namespace EliteMMO.Scripted.Models.ScriptOnEventTool
         }
         public void StopBot()
         {
-            this.BotRunning = false;
-
+            BotRunning = false;
             bgwScriptEvents.CancelAsync();
         }
-        public bool BotRunning
+        public IList<EventElement> LoadOnEventsFile()
         {
-            get => this.botRunning;
-            set => this.botRunning = value;
-        }
-        public string FileXML
-        {
-            get => this.fileXML;
-            set => this.fileXML = value;
-        }
-        public string Extension
-        {
-            get => this.extension;
-            set => this.extension = value;
-        }
-        public void LoadOnEventsFile()
-        {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-
-            if (Directory.Exists(eventPath) == false)
-                Directory.CreateDirectory(eventPath);
-
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Title = "Select OnEvents File To Load";
-            openFile.InitialDirectory = eventPath;
-            openFile.Filter = "OnEvent File (*.xml)|*.xml|OnEvent File (*.oef)|*.oef";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
-
-            DialogResult dlgResult = openFile.ShowDialog();
-            if (dlgResult != DialogResult.OK)
-            {
-                return;
-            }
-            fileXML = openFile.FileName;
-
             try
             {
-                eventsList.Items.Clear();
-                var ext = Path.GetExtension(openFile.FileName);
-                extension = ext;
-
-                if (ext == ".oef")
+                IList<EventElement> eventsList = new List<EventElement>();
+                extension = Path.GetExtension(fileXML);
+                if (extension == ".oef")
                 {
                     XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(openFile.FileName);
-
+                    xmlDoc.Load(fileXML);
                     XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
                     XmlNodeList nodeList = mainNode.ChildNodes;
-
                     for (int x = 0; x < nodeList.Count; x++)
                     {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["eventtext"].Value.ToString(),
-                            nodeList[x].Attributes["eventcmd"].Value.ToString(),
-                        }));
-                        string temp = nodeList[x].Attributes["eventchecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
-
-                        eventsList.Items[x].SubItems.Add("ALL");
-                        eventsList.Items[x].SubItems.Add("False");
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["eventtext"].Value.ToString()));
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["eventcmd"].Value.ToString()));
+                        eventsList[x].Checked = Convert.ToBoolean(nodeList[x].Attributes["eventchecked"].Value.ToString());
+                        eventsList[x].SubItems.Add("ALL");
+                        eventsList[x].SubItems.Add("False");
                     }
                 }
-                else if (ext == ".xml")
+                else if (extension == ".xml")
                 {
                     XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(openFile.FileName);
-
+                    xmlDoc.Load(fileXML);
                     XmlNode mainNode = xmlDoc.SelectSingleNode("OnEventsList");
                     XmlNodeList nodeList = mainNode.ChildNodes;
-
-                    for (var x = 0; x < nodeList.Count; x++)
+                    for (int x = 0; x < nodeList.Count; x++)
                     {
-                        eventsList.Items.Add(new ListViewItem(new string[]
-                        {
-                            nodeList[x].Attributes["ChatEvent"].Value.ToString(),
-                            nodeList[x].Attributes["EventCommand"].Value.ToString(),
-                            nodeList[x].Attributes["ChatType"].Value.ToString(),
-                            nodeList[x].Attributes["isRegEx"].Value.ToString()
-                        }));
-
-                        var temp = nodeList[x].Attributes["isChecked"].Value.ToString();
-                        eventsList.Items[x].Checked = Convert.ToBoolean(temp);
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["ChatEvent"].Value.ToString()));
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["EventCommand"].Value.ToString()));
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["ChatType"].Value.ToString()));
+                        eventsList.Add(new EventElement(nodeList[x].Attributes["isRegEx"].Value.ToString()));
+                        eventsList[x].Checked = Convert.ToBoolean(nodeList[x].Attributes["isChecked"].Value.ToString());
                     }
                 }
+                return eventsList;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show("Failed to load the OnEvents file. Please try again.\n" + ex.Message);
-                throw;
+                throw e;
             }
         }
-        public void SaveOnEventsFile(IList currentEventsListItems, IList<string> chatEventTexts, IList<string> eventCommandTexts, IList<string> chatTypeXTexts, IList<string> isRegExTexts, IList<bool> checkedItem)
+        public void SaveOnEventsFile(string saveFileName, IList currentEventsListItems, IList<string> chatEventTexts, IList<string> eventCommandTexts, IList<string> chatTypeXTexts, IList<string> isRegExTexts, IList<bool> checkedItem)
         {
-            var eventPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Events\\";
-
-            if (Directory.Exists(eventPath) == false)
-            {
-                Directory.CreateDirectory(eventPath);
-            }
-
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Title = "Save OnEvents File";
-            saveFile.InitialDirectory = eventPath;
-            saveFile.Filter = "OnEvent File (*.xml)|*.xml";
-            saveFile.FilterIndex = 0;
-            saveFile.RestoreDirectory = true;
-
-            DialogResult dlgResult = saveFile.ShowDialog();
-            if (dlgResult != DialogResult.OK)
-            {
-                return;
-            }
-
             try
             {
-                XmlTextWriter xmlWriter = new XmlTextWriter(saveFile.FileName, Encoding.UTF8);
+                XmlTextWriter xmlWriter = new XmlTextWriter(saveFileName, Encoding.UTF8);
                 xmlWriter.Formatting = Formatting.Indented;
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("OnEventsList");
-
                 for (int i = 0; i < currentEventsListItems.Count; i++)
                 {
                     xmlWriter.WriteStartElement("Event");
@@ -169,35 +136,28 @@ namespace EliteMMO.Scripted.Models.ScriptOnEventTool
                     xmlWriter.WriteAttributeString("EventCommand", eventCommandTexts[i]);
                     xmlWriter.WriteAttributeString("ChatType", chatTypeXTexts[i]);
                     xmlWriter.WriteAttributeString("isRegEx", isRegExTexts[i]);
-
                     xmlWriter.WriteEndElement();
                 }
-
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndDocument();
                 xmlWriter.Close();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show("Failed to save OnEvents file. Please try another location.\n" + ex.Message);
-                throw;
+                throw e;
             }
         }
-
         public void CreateOrSaveEvent(IList currentEventsListItems, IList<string> chatEventTexts, IList<string> eventCommandTexts, IList<string> chatTypeXTexts, IList<string> isRegExTexts, IList<bool> checkedItem)
         {
-            if (this.extension == ".oef" || this.extension == "xml")
+            if (extension == ".oef" || extension == "xml")
             {
                 XmlDocument saveFile = new XmlDocument();
-
                 XmlNode rootNode = saveFile.CreateElement("OnEventsList");
                 saveFile.AppendChild(rootNode);
-
-                for (var x = 0; x < currentEventsListItems.Count; x++)
+                for (int x = 0; x < currentEventsListItems.Count; x++)
                 {
                     XmlNode userNode = saveFile.CreateElement("Event");
-
-                    if (this.extension == ".oef")
+                    if (extension == ".oef")
                     {
                         XmlAttribute ChatEvent = saveFile.CreateAttribute("eventtext");
                         ChatEvent.Value = chatEventTexts[x];
@@ -211,8 +171,7 @@ namespace EliteMMO.Scripted.Models.ScriptOnEventTool
                         isChecked.Value = checkedItem[x].ToString();
                         userNode.Attributes.Append(isChecked);
                     }
-
-                    if (this.extension == ".xml")
+                    if (extension == ".xml")
                     {
                         XmlAttribute isChecked = saveFile.CreateAttribute("isChecked");
                         isChecked.Value = checkedItem[x].ToString();
@@ -234,43 +193,59 @@ namespace EliteMMO.Scripted.Models.ScriptOnEventTool
                         isRegEx.Value = isRegExTexts[x];
                         rootNode.AppendChild(userNode);
                     }
-
                     saveFile.Save(fileXML);
                 }
             }
         }
-
-        private void BgwScriptEventsDoWork()
+        public bool BotRunning
         {
-            while (botRunning || !bgwScriptEvents.CancellationPending)
+            get => botRunning;
+            set => botRunning = value;
+        }
+        public string FileXML
+        {
+            get => fileXML;
+            set => fileXML = value;
+        }
+        public string Extension
+        {
+            get => extension;
+            set => extension = value;
+        }
+        public string EventsFilePath
+        {
+            get => eventsFilePath;
+            set => eventsFilePath = value;
+        }
+        public bool UseRegEx
+        {
+            get => useRegEx;
+            set => useRegEx = value;
+        }
+        public class EventElement
+        {
+            bool checkedElement;
+            string item;
+            IList<string> subItems;
+            public EventElement(string item)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
-
-                var onEvent = (from object itemChecked in eventsListItems.CheckedItems
-                               select itemChecked.ToString()).ToList();
-
-                if (eventsListItems.Items.Count == 0 || onEvent.Count == 0)
-                    continue;
-
-                var line = api.Chat.GetNextChatLine();
-                if (string.IsNullOrEmpty(line?.Text)) continue;
-
-                if (useRegEx.Checked)
-                {
-                    foreach (var item in from item in eventsListItems.Items.Cast<ListViewItem>().Where(item => line.Text.ToLower().Contains(item.Text.ToLower())) let scan = new Regex(eventsListItems.Text, RegexOptions.IgnoreCase) where scan.IsMatch(line.Text) select item)
-                    {
-                        api.ThirdParty.SendString(item.SubItems[1].Text);
-                    }
-                }
-                else
-                {
-                    foreach (var item in eventsListItems.Items.Cast<ListViewItem>().Where(item => line.Text.ToLower().Contains(item.Text.ToLower())))
-                    {
-                        api.ThirdParty.SendString(item.SubItems[1].Text);
-                    }
-                }
+                Item = item;
+            }
+            public string Item
+            {
+                get => item;
+                set => item = value;
+            }
+            public bool Checked
+            {
+                get => checkedElement;
+                set => checkedElement = value;
+            }
+            public IList<string> SubItems
+            {
+                get => subItems;
+                set => subItems = value;
             }
         }
-
     }
 }
